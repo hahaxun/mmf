@@ -5,11 +5,14 @@ import unittest
 import multimodelity.utils.text as text_utils
 import numpy as np
 import torch
+
 from multimodelity.common.registry import registry
 from multimodelity.common.sample import Sample, SampleList
 from multimodelity.utils.configuration import Configuration
 from multimodelity.utils.env import setup_imports
-from multimodelity.utils.general import get_multimodelity_root
+from multimodelity.utils.general import get_mmf_root
+from packaging.version import LegacyVersion
+
 from tests.test_utils import dummy_args
 from tests.utils.test_model import TestDecoderModel
 
@@ -152,19 +155,26 @@ class TestUtilsText(unittest.TestCase):
         tokens = model(sample_list)["captions"]
 
         # these are expected tokens for sum_threshold = 0.5
-        expected_tokens = [
-            1.0,
-            29.0,
-            11.0,
-            11.0,
-            39.0,
-            10.0,
-            31.0,
-            4.0,
-            19.0,
-            39.0,
-            2.0,
-        ]
+
+        # Because of a bug fix in https://github.com/pytorch/pytorch/pull/47386
+        # the torch.Tensor.multinomail will generate different random sequence.
+        # TODO: Remove this hack after OSS uses later version of PyTorch.
+        if LegacyVersion(torch.__version__) > LegacyVersion("1.7.1"):
+            expected_tokens = [1.0, 23.0, 38.0, 30.0, 5.0, 11.0, 2.0]
+        else:
+            expected_tokens = [
+                1.0,
+                29.0,
+                11.0,
+                11.0,
+                39.0,
+                10.0,
+                31.0,
+                4.0,
+                19.0,
+                39.0,
+                2.0,
+            ]
 
         self.assertEqual(tokens[0].tolist(), expected_tokens)
 
