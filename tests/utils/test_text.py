@@ -10,7 +10,7 @@ from multimodelity.common.registry import registry
 from multimodelity.common.sample import Sample, SampleList
 from multimodelity.utils.configuration import Configuration
 from multimodelity.utils.env import setup_imports
-from multimodelity.utils.general import get_mmf_root
+from multimodelity.utils.general import get_multimodelity_root
 from packaging.version import LegacyVersion
 
 from tests.test_utils import dummy_args

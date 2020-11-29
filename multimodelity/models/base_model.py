@@ -235,7 +235,7 @@ class BaseModel(nn.Module):
                 f"Missing keys {incompatible_keys.missing_keys} in the"
                 + " checkpoint.\n"
                 + "If this is not your checkpoint, please open up an "
-                + "issue on MMF GitHub. \n"
+                + "issue on multimodelity GitHub. \n"
                 + f"Unexpected keys if any: {incompatible_keys.unexpected_keys}"
             )
 
@@ -246,7 +246,7 @@ class BaseModel(nn.Module):
                 + "This is usually not a problem with pretrained models, but "
                 + "if this is your own model, please double check. \n"
                 + "If you think this is an issue, please open up a "
-                + "bug at MMF GitHub."
+                + "bug at multimodelity GitHub."
             )
 
         instance.eval()
