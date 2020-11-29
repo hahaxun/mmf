@@ -4,9 +4,9 @@ import unittest
 import warnings
 from io import StringIO
 
-from mmf.common.registry import registry
-from mmf.utils.configuration import Configuration
-from mmf.utils.env import setup_imports
+from multimodelity.common.registry import registry
+from multimodelity.utils.configuration import Configuration
+from multimodelity.utils.env import setup_imports
 from tests.test_utils import dummy_args
 
 

@@ -1,5 +1,5 @@
 modules.losses
 ===============
 
-.. automodule:: mmf.modules.losses
+.. automodule:: multimodelity.modules.losses
   :members:

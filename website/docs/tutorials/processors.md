@@ -4,7 +4,7 @@ title: 'Adding a Processor'
 sidebar_label: Adding a Processor
 ---
 
-Processors can be thought of as torchvision transforms which transform a sample into a form usable by the model. Each processor takes in a dictionary and returns a dictionary. Processors are initialized as member variables of the dataset and can be used to preprocess samples in the proper format. Here is how processors work in mmf:
+Processors can be thought of as torchvision transforms which transform a sample into a form usable by the model. Each processor takes in a dictionary and returns a dictionary. Processors are initialized as member variables of the dataset and can be used to preprocess samples in the proper format. Here is how processors work in multimodelity:
 
 <div align="center">
   <img width="80%" src="https://i.imgur.com/9sZTiUp.gif"/>
@@ -14,7 +14,7 @@ For this tutorial, we will create three different types of processors :
 
 1. a simple processor for text,
 2. a simple processor for images,
-3. a text processor by extending an existing vocabulary processor in mmf,
+3. a text processor by extending an existing vocabulary processor in multimodelity,
 
 ## Create a simple Text Processor
 
@@ -22,10 +22,10 @@ Here we will create a simple processor that takes a sentence and returns a list 
 
 ```python
 
-# registry is needed to register the processor so it is discoverable by MMF
-from mmf.common.registry import registry
-# We will inherit the BaseProcessor in MMF
-from mmf.datasets.processors import BaseProcessor
+# registry is needed to register the processor so it is discoverable by multimodelity
+from multimodelity.common.registry import registry
+# We will inherit the BaseProcessor in multimodelity
+from multimodelity.datasets.processors import BaseProcessor
 
 @registry.register_processor("simple_processor")
 class SimpleProccessor(BaseProcessor):
@@ -59,10 +59,10 @@ In this section, we will learn how to add an image processor. We will add a proc
 
 import torch
 
-# registry is needed to register the processor so it is discoverable by MMF
-from mmf.common.registry import registry
-# We will inherit the BaseProcessor in MMF
-from mmf.datasets.processors import BaseProcessor
+# registry is needed to register the processor so it is discoverable by multimodelity
+from multimodelity.common.registry import registry
+# We will inherit the BaseProcessor in multimodelity
+from multimodelity.datasets.processors import BaseProcessor
 
 @registry.register_processor("GrayScale")
 class GrayScale(BaseProcessor):
@@ -99,20 +99,20 @@ The `torchvision_transforms` image processor loads the different transform proce
 
 ## Extending an existing processor: Create a fasttext sentence processor
 
-A [`fasttext`](https://github.com/facebookresearch/mmf/blob/f11adf0e4a5a28e85239176c44342f6471550e84/mmf/datasets/processors/processors.py#L361) processor is available in MMF that returns word embeddings. Here we will create a `fasttext` _sentence_ processor hereby extending the `fasttext` word processor.
+A [`fasttext`](https://github.com/facebookresearch/multimodelity/blob/f11adf0e4a5a28e85239176c44342f6471550e84/multimodelity/datasets/processors/processors.py#L361) processor is available in multimodelity that returns word embeddings. Here we will create a `fasttext` _sentence_ processor hereby extending the `fasttext` word processor.
 
 ```python
 
 import torch
 
-# registry is needed to register the processor so it is discoverable by MMF
-from mmf.common.registry import registry
-# We will inherit the FastText Processor already present in MMF.
+# registry is needed to register the processor so it is discoverable by multimodelity
+from multimodelity.common.registry import registry
+# We will inherit the FastText Processor already present in multimodelity.
 # FastTextProcessor inherits from VocabProecssor
-from mmf.datasets.processors import FastTextProcessor
+from multimodelity.datasets.processors import FastTextProcessor
 
 
-# Register the processor so that MMF can discover it
+# Register the processor so that multimodelity can discover it
 @registry.register_processor("fasttext_sentence_vector")
 class FastTextSentenceVectorProcessor(FastTextProcessor):
    # Override the call method
@@ -155,4 +155,4 @@ dataset_config:
 
 ## Next Steps
 
-Learn more about processors in the [processors documentation](https://mmf.sh/api/lib/datasets/processors.html).
+Learn more about processors in the [processors documentation](https://multimodelity.sh/api/lib/datasets/processors.html).

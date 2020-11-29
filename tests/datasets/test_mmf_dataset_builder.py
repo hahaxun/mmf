@@ -4,12 +4,12 @@ import os
 import unittest
 from unittest.mock import MagicMock
 
-from mmf.datasets.base_dataset import BaseDataset
-from mmf.datasets.mmf_dataset_builder import MMFDatasetBuilder
+from multimodelity.datasets.base_dataset import BaseDataset
+from multimodelity.datasets.multimodelity_dataset_builder import multimodelityDatasetBuilder
 from omegaconf import OmegaConf
 
 
-class SimpleMMFDataset(BaseDataset):
+class SimplemultimodelityDataset(BaseDataset):
     def __init__(
         self, dataset_name, config, dataset_type, *args, num_examples, **kwargs
     ):
@@ -24,7 +24,7 @@ class SimpleMMFDataset(BaseDataset):
         return self.num_examples
 
 
-class TestMMFDatasetBuilder(unittest.TestCase):
+class TestmultimodelityDatasetBuilder(unittest.TestCase):
     def setUp(self):
         self.config = OmegaConf.create(
             {
@@ -57,8 +57,8 @@ class TestMMFDatasetBuilder(unittest.TestCase):
         self._test_alignment_in_dataset(self.test)
 
     def _create_dataset(self, dataset_type):
-        dataset_builder = MMFDatasetBuilder(
-            "vqa", functools.partial(SimpleMMFDataset, num_examples=100)
+        dataset_builder = multimodelityDatasetBuilder(
+            "vqa", functools.partial(SimplemultimodelityDataset, num_examples=100)
         )
         return dataset_builder.load(self.config, dataset_type)
 

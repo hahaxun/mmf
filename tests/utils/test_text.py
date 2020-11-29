@@ -2,14 +2,14 @@
 import os
 import unittest
 
-import mmf.utils.text as text_utils
+import multimodelity.utils.text as text_utils
 import numpy as np
 import torch
-from mmf.common.registry import registry
-from mmf.common.sample import Sample, SampleList
-from mmf.utils.configuration import Configuration
-from mmf.utils.env import setup_imports
-from mmf.utils.general import get_mmf_root
+from multimodelity.common.registry import registry
+from multimodelity.common.sample import Sample, SampleList
+from multimodelity.utils.configuration import Configuration
+from multimodelity.utils.env import setup_imports
+from multimodelity.utils.general import get_multimodelity_root
 from tests.test_utils import dummy_args
 from tests.utils.test_model import TestDecoderModel
 
@@ -31,7 +31,7 @@ class TestUtilsText(unittest.TestCase):
         setup_imports()
         torch.manual_seed(1234)
         config_path = os.path.join(
-            get_mmf_root(),
+            get_multimodelity_root(),
             "..",
             "projects",
             "butd",
@@ -186,7 +186,7 @@ class TestUtilsTextBeamSearch(unittest.TestCase):
         setup_imports()
         torch.manual_seed(1234)
         config_path = os.path.join(
-            get_mmf_root(),
+            get_multimodelity_root(),
             "..",
             "projects",
             "butd",

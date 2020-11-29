@@ -2,7 +2,7 @@
 
 import unittest
 
-import mmf.modules.fusions as fusions
+import multimodelity.modules.fusions as fusions
 import torch
 
 

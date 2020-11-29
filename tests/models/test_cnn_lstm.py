@@ -4,11 +4,11 @@ import unittest
 
 import numpy as np
 import torch
-from mmf.common.registry import registry
-from mmf.common.sample import Sample, SampleList
-from mmf.models.cnn_lstm import CNNLSTM
-from mmf.utils.configuration import Configuration
-from mmf.utils.general import get_mmf_root
+from multimodelity.common.registry import registry
+from multimodelity.common.sample import Sample, SampleList
+from multimodelity.models.cnn_lstm import CNNLSTM
+from multimodelity.utils.configuration import Configuration
+from multimodelity.utils.general import get_multimodelity_root
 from tests.test_utils import dummy_args
 
 
@@ -18,7 +18,7 @@ class TestModelCNNLSTM(unittest.TestCase):
         registry.register("clevr_text_vocab_size", 80)
         registry.register("clevr_num_final_outputs", 32)
         config_path = os.path.join(
-            get_mmf_root(),
+            get_multimodelity_root(),
             "..",
             "projects",
             "others",

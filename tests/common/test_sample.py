@@ -3,7 +3,7 @@ import unittest
 
 import tests.test_utils as test_utils
 import torch
-from mmf.common.sample import Sample, to_device
+from multimodelity.common.sample import Sample, to_device
 
 
 class TestSample(unittest.TestCase):

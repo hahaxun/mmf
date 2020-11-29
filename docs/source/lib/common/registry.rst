@@ -1,5 +1,5 @@
 common.registry
 ===============
 
-.. automodule:: mmf.common.registry
+.. automodule:: multimodelity.common.registry
   :members:

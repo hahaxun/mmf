@@ -9,14 +9,14 @@ from io import StringIO
 from unittest.mock import Mock, patch
 
 import torch
-from mmf.common.registry import registry
-from mmf.models.base_model import BaseModel
-from mmf.trainers.callbacks.checkpoint import CheckpointCallback
-from mmf.trainers.callbacks.early_stopping import EarlyStoppingCallback
-from mmf.trainers.callbacks.lr_scheduler import LRSchedulerCallback
-from mmf.utils.checkpoint import Checkpoint
-from mmf.utils.configuration import load_yaml
-from mmf.utils.file_io import PathManager
+from multimodelity.common.registry import registry
+from multimodelity.models.base_model import BaseModel
+from multimodelity.trainers.callbacks.checkpoint import CheckpointCallback
+from multimodelity.trainers.callbacks.early_stopping import EarlyStoppingCallback
+from multimodelity.trainers.callbacks.lr_scheduler import LRSchedulerCallback
+from multimodelity.utils.checkpoint import Checkpoint
+from multimodelity.utils.configuration import load_yaml
+from multimodelity.utils.file_io import PathManager
 from omegaconf import OmegaConf
 from tests.test_utils import compare_state_dicts, skip_if_no_cuda
 
@@ -24,7 +24,7 @@ from tests.test_utils import compare_state_dicts, skip_if_no_cuda
 @contextlib.contextmanager
 def mock_env_with_temp():
     d = tempfile.TemporaryDirectory()
-    patched = patch("mmf.utils.checkpoint.get_mmf_env", return_value=d.name)
+    patched = patch("multimodelity.utils.checkpoint.get_multimodelity_env", return_value=d.name)
     patched.start()
     yield d.name
     d.cleanup()
@@ -485,7 +485,7 @@ class TestUtilsCheckpoint(unittest.TestCase):
             self._do_a_pass()
 
             with patch(
-                "mmf.utils.checkpoint.load_pretrained_model",
+                "multimodelity.utils.checkpoint.load_pretrained_model",
                 return_value=ret_load_pretrained_zoo,
             ):
                 self.trainer.config.checkpoint.resume_zoo = "random"
@@ -538,7 +538,7 @@ class TestUtilsCheckpoint(unittest.TestCase):
             )
 
             with patch(
-                "mmf.utils.checkpoint.load_pretrained_model",
+                "multimodelity.utils.checkpoint.load_pretrained_model",
                 return_value=ret_load_pretrained_zoo,
             ):
                 self.trainer.config.checkpoint.resume_zoo = "random"

@@ -3,10 +3,10 @@ import collections
 import unittest
 from unittest.mock import MagicMock
 
-import mmf.modules.losses as losses
+import multimodelity.modules.losses as losses
 import torch
-from mmf.common.registry import registry
-from mmf.common.sample import SampleList
+from multimodelity.common.registry import registry
+from multimodelity.common.sample import SampleList
 
 
 RETURN_VALUE = torch.tensor(1.0)
@@ -36,19 +36,19 @@ class TestModuleLosses(unittest.TestCase):
     def tearDown(self):
         registry.get_loss_class = self.registry_loss_class
 
-    def test_mmf_loss(self):
+    def test_multimodelity_loss(self):
         get_loss_class_mock = MagicMock(side_effect=build_loss_side_effect())
         registry.get_loss_class = get_loss_class_mock
-        # Test if MMFLoss accepts empty parameters
-        self.assertRaises(ValueError, losses.MMFLoss)
-        self.assertTrue(losses.MMFLoss({"type": "cross_entropy"}).name, "cross_entropy")
-        self.assertTrue(losses.MMFLoss("cross_entropy").name, "cross_entropy")
-        self.assertRaises(AssertionError, losses.MMFLoss, [])
+        # Test if multimodelityLoss accepts empty parameters
+        self.assertRaises(ValueError, losses.multimodelityLoss)
+        self.assertTrue(losses.multimodelityLoss({"type": "cross_entropy"}).name, "cross_entropy")
+        self.assertTrue(losses.multimodelityLoss("cross_entropy").name, "cross_entropy")
+        self.assertRaises(AssertionError, losses.multimodelityLoss, [])
         # Multi requires dict
-        self.assertRaises(AssertionError, losses.MMFLoss, "multi")
+        self.assertRaises(AssertionError, losses.multimodelityLoss, "multi")
 
-        cross_entropy = losses.MMFLoss("cross_entropy")
-        cross_entropy_from_dict = losses.MMFLoss({"type": "cross_entropy"})
+        cross_entropy = losses.multimodelityLoss("cross_entropy")
+        cross_entropy_from_dict = losses.multimodelityLoss({"type": "cross_entropy"})
         sample_list = SampleList()
         sample_list.dataset_type = "val"
         sample_list.dataset_name = "vqa2"

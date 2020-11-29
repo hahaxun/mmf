@@ -1,6 +1,6 @@
 # BAN
 
-This repository contains the code for BAN model. Please cite the following paper if you are using BAN model from mmf:
+This repository contains the code for BAN model. Please cite the following paper if you are using BAN model from multimodelity:
 
 * Kim, J. H., Jun, J., & Zhang, B. T. (2018). *Bilinear attention networks*. In Advances in Neural Information Processing Systems (pp. 1564-1574). ([arXiV](https://arxiv.org/abs/1805.07932))
 ```
@@ -15,10 +15,10 @@ This repository contains the code for BAN model. Please cite the following paper
 
 ## Installation
 
-Follow installation instructions in the [documentation](https://mmf.readthedocs.io/en/latest/notes/installation.html).
+Follow installation instructions in the [documentation](https://multimodelity.readthedocs.io/en/latest/notes/installation.html).
 
 ## Training
 To train BAN model on the VQA2 dataset, run the following command
 ```
-mmf_run config=projects/ban/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=ban
+multimodelity_run config=projects/ban/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=ban
 ```

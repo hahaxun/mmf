@@ -17,12 +17,12 @@ jobs:
         # 0 here indicates fetch all history for proper doc setup
         fetch-depth: 0
         ref: master
-        path: mmf_master
+        path: multimodelity_master
 
     - name: Setup Miniconda
       uses: goanpeca/setup-miniconda@v1
       with:
-        activate-environment: mmf
+        activate-environment: multimodelity
         python-version: 3.7
         auto-update-conda: true
         use-only-tar-bz2: true
@@ -46,14 +46,14 @@ jobs:
         path: |
           /usr/share/miniconda/envs/
           ${{ steps.yarn-cache.outputs.dir }}
-        key: ${{ runner.os }}-mmf-${{ env.CACHE_NUMBER }}-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/setup.py') }}-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-multimodelity-${{ env.CACHE_NUMBER }}-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/setup.py') }}-${{ hashFiles('**/yarn.lock') }}
 
 
-    - name: Install and build MMF
+    - name: Install and build multimodelity
       shell: bash -l {0}
       run: |
-        conda activate mmf
-        cd ${GITHUB_WORKSPACE}/mmf_master
+        conda activate multimodelity
+        cd ${GITHUB_WORKSPACE}/multimodelity_master
         python setup.py install
         python -c 'import torch; print("Torch version:", torch.__version__)'
         python -m torch.utils.collect_env
@@ -74,4 +74,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./mmf_master/website/build
+        publish_dir: ./multimodelity_master/website/build

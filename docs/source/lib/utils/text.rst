@@ -1,5 +1,5 @@
 utils.text
 ===============
 
-.. automodule:: mmf.utils.text
+.. automodule:: multimodelity.utils.text
   :members:

@@ -6,13 +6,13 @@ sidebar_label: Hateful Memes Challenge
 
 The Hateful Memes challenge is available at [this link](https://www.drivendata.org/competitions/70/hateful-memes-phase-2/data/).
 
-In MMF, we provide the starter code and baseline pretrained models for this challenge and the configurations used for training the reported baselines. For more details check [this link](https://github.com/facebookresearch/mmf/tree/master/projects/hateful_memes).
+In multimodelity, we provide the starter code and baseline pretrained models for this challenge and the configurations used for training the reported baselines. For more details check [this link](https://github.com/facebookresearch/multimodelity/tree/master/projects/hateful_memes).
 
 In this tutorial, we provide steps for running training and evaluation with MMBT model on hateful memes dataset and generating submission file for the challenge. The same steps can be used for your own models.
 
 ## Installation and Preparing the dataset
 
-Follow the prerequisites for installation and dataset [here](https://github.com/facebookresearch/mmf/tree/master/projects/hateful_memes#prerequisites).
+Follow the prerequisites for installation and dataset [here](https://github.com/facebookresearch/multimodelity/tree/master/projects/hateful_memes#prerequisites).
 
 ## Training and Evaluation
 
@@ -21,7 +21,7 @@ Follow the prerequisites for installation and dataset [here](https://github.com/
 For running training on train set, run the following command:
 
 ```bash
-mmf_run config=projects/hateful_memes/configs/mmbt/defaults.yaml \
+multimodelity_run config=projects/hateful_memes/configs/mmbt/defaults.yaml \
     model=mmbt \
     dataset=hateful_memes \
     run_type=train_val
@@ -34,7 +34,7 @@ This will train the `mmbt` model on the dataset and generate the checkpoints and
 Next run evaluation on the validation set:
 
 ```bash
-mmf_run config=projects/hateful_memes/configs/mmbt/defaults.yaml \
+multimodelity_run config=projects/hateful_memes/configs/mmbt/defaults.yaml \
     model=mmbt \
     dataset=hateful_memes \
     run_type=val \
@@ -52,10 +52,10 @@ After we trained the model and evaluated on the validation set, we will generate
 - Probability that the meme is hateful, `proba`
 - Binary label that the meme is hateful (1) or non-hateful (0), `label`
 
-With MMF you can directly generate the predictions in the required submission format with the following command:
+With multimodelity you can directly generate the predictions in the required submission format with the following command:
 
 ```bash
-mmf_predict config=projects/hateful_memes/configs/mmbt/defaults.yaml \
+multimodelity_predict config=projects/hateful_memes/configs/mmbt/defaults.yaml \
     model=mmbt \
     dataset=hateful_memes \
     run_type=test \
@@ -82,6 +82,6 @@ dataset_config.hateful_memes.annotations.test[0]=hateful_memes/defaults/annotati
 
 This will load the phase 1 files for you and evaluate those.
 
-## Building on top of MMF and Open Sourcing your code
+## Building on top of multimodelity and Open Sourcing your code
 
-To understand how you build on top of MMF for your own custom models and then open source your code, take a look at this [example](https://github.com/apsdehal/hm_example_mmf).
+To understand how you build on top of multimodelity for your own custom models and then open source your code, take a look at this [example](https://github.com/apsdehal/hm_example_multimodelity).

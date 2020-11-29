@@ -2,7 +2,7 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
 
 #
-# mmf documentation build configuration file, created by
+# multimodelity documentation build configuration file, created by
 # sphinx-quickstart on Tue Apr 23 10:42:55 2019.
 #
 # This file is execfile()d with the current directory set to its
@@ -35,7 +35,7 @@
 import datetime
 
 import pytorch_sphinx_theme
-from mmf import version
+from multimodelity import version
 from packaging.version import parse
 from recommonmark.transform import AutoStructify
 
@@ -69,7 +69,7 @@ source_suffix = [".rst", ".md"]
 master_doc = "index"
 
 # General information about the project.
-project = "MMF"
+project = "multimodelity"
 copyright = str(datetime.datetime.now().year) + ", Facebook AI Research"
 author = "Facebook AI Research"
 
@@ -116,7 +116,7 @@ templates_path = ["_templates"]
 #
 html_theme_options = {
     "includehidden": False,
-    "canonical_url": "https://mmf.sh/api/",
+    "canonical_url": "https://multimodelity.sh/api/",
     "pytorch_project": "docs",
 }
 
@@ -143,7 +143,7 @@ html_baseurl = "/"
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "mmfdoc"
+htmlhelp_basename = "multimodelitydoc"
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -167,7 +167,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "mmf.tex", "MMF Documentation", "Facebook AI Research", "manual")
+    (master_doc, "multimodelity.tex", "multimodelity Documentation", "Facebook AI Research", "manual")
 ]
 
 
@@ -175,7 +175,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "mmf", "MMF Documentation", [author], 1)]
+man_pages = [(master_doc, "multimodelity", "multimodelity Documentation", [author], 1)]
 
 
 # -- Options for Texinfo output -------------------------------------------
@@ -186,16 +186,16 @@ man_pages = [(master_doc, "mmf", "MMF Documentation", [author], 1)]
 texinfo_documents = [
     (
         master_doc,
-        "mmf",
-        "MMF Documentation",
+        "multimodelity",
+        "multimodelity Documentation",
         author,
-        "mmf",
+        "multimodelity",
         "One line description of project.",
         "Miscellaneous",
     )
 ]
 
-github_doc_root = "https://github.com/facebookresearch/mmf/tree/master"
+github_doc_root = "https://github.com/facebookresearch/multimodelity/tree/master"
 
 
 # At the bottom of conf.py

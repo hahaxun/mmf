@@ -8,15 +8,15 @@
  */
 
 module.exports = {
-  title: 'MMF',
+  title: 'multimodelity',
   tagline:
     'A modular framework for vision & language multimodal ' +
     'research from Facebook AI Research (FAIR).',
-  url: 'https://mmf.sh',
+  url: 'https://multimodelity.sh',
   baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'facebookresearch',
-  projectName: 'mmf',
+  projectName: 'multimodelity',
   themeConfig: {
     image: 'img/logo.png',
     // defaultDarkMode: false,
@@ -31,7 +31,7 @@ module.exports = {
     navbar: {
       title: '',
       logo: {
-        alt: 'MMF Logo',
+        alt: 'multimodelity Logo',
         src: 'img/banner_logo.svg',
       },
       links: [
@@ -47,7 +47,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://github.com/facebookresearch/mmf',
+          href: 'https://github.com/facebookresearch/multimodelity',
           label: 'GitHub',
           position: 'left',
         },
@@ -62,11 +62,11 @@ module.exports = {
             {
               label: 'Blog',
               href:
-                'https://medium.com/pytorch/bootstrapping-a-multimodal-project-using-mmf-a-pytorch-powered-multimodal-framework-464f75164af7',
+                'https://medium.com/pytorch/bootstrapping-a-multimodal-project-using-multimodelity-a-pytorch-powered-multimodal-framework-464f75164af7',
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebookresearch/mmf',
+              href: 'https://github.com/facebookresearch/multimodelity',
             },
           ],
         },
@@ -107,7 +107,7 @@ module.exports = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           editUrl:
-            'https://github.com/facebookresearch/mmf/edit/master/website/',
+            'https://github.com/facebookresearch/multimodelity/edit/master/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

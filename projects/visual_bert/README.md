@@ -1,6 +1,6 @@
 # VisualBERT
 
-This repository contains the code for pytorch implementation of VisualBERT model, released originally under this ([repo](https://github.com/uclanlp/visualbert)). Please cite the following papers if you are using VisualBERT model from mmf:
+This repository contains the code for pytorch implementation of VisualBERT model, released originally under this ([repo](https://github.com/uclanlp/visualbert)). Please cite the following papers if you are using VisualBERT model from multimodelity:
 
 * Li, L. H., Yatskar, M., Yin, D., Hsieh, C. J., & Chang, K. W. (2019). *Visualbert: A simple and performant baseline for vision and language*. arXiv preprint arXiv:1908.03557. ([arXiV](https://arxiv.org/abs/1908.03557))
 ```
@@ -26,13 +26,13 @@ and
 
 ## Installation
 
-Follow installation instructions in the [documentation](https://mmf.readthedocs.io/en/latest/notes/installation.html).
+Follow installation instructions in the [documentation](https://multimodelity.readthedocs.io/en/latest/notes/installation.html).
 
 ## Training
 
 To train VisualBERT model on the VQA2.0 dataset, run the following command
 ```
-mmf_run config=projects/visual_bert/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=visual_bert
+multimodelity_run config=projects/visual_bert/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=visual_bert
 ```
 
 Based on the config used and `training_head_type` defined in the config, the model can use either pretraining head or donwstream task specific heads(VQA, Vizwiz, SNLI-VE, MM IMDB or NLVR2).

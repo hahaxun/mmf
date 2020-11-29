@@ -6,7 +6,7 @@ sidebar_label: Pretrained Models
 
 **[Outdated]** A new version of this will be uploaded soon
 
-Performing inference using pretrained models in MMF is easy. Pickup a pretrained model from the table below and follow the steps to do inference or generate predictions for EvalAI evaluation. This section expects that you have already installed the required data as explained in [quickstart](./quickstart).
+Performing inference using pretrained models in multimodelity is easy. Pickup a pretrained model from the table below and follow the steps to do inference or generate predictions for EvalAI evaluation. This section expects that you have already installed the required data as explained in [quickstart](./quickstart).
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
@@ -22,7 +22,7 @@ Performing inference using pretrained models in MMF is easy. Pickup a pretrained
 Now, let's say your link to pretrained model `model` is `link` (select from table > right click > copy link address), the respective config should be at `configs/[task]/[dataset]/[model].yaml`. For example, config file for `vqa2 train_and_val` should be `configs/vqa/vqa2/pythia_train_and_val.yaml`. Now to run inference for EvalAI, run the following command.
 
 ```
-cd ~/mmf/data
+cd ~/multimodelity/data
 mkdir -p models && cd models;
 # Download the pretrained model
 wget [link]
@@ -48,4 +48,4 @@ Table below shows evaluation metrics for various pretrained models:
 
 **Note for BUTD model :** For training BUTD model use the config `butd.yaml`. Training uses greedy decoding for validation. Currently we do not have support to train the model using beam search decoding validation. We will add that support soon. For inference only use `butd_beam_search.yaml` config that supports beam search decoding.
 
-**Note** that, for simplicity, our current released model **does not** incorporate extensive data augmentations (e.g. visual genome, visual dialogue) during training, which was used in our challenge winner entries for VQA and VizWiz 2018. As a result, there can be some performance gap to models reported and released previously. If you are looking for reproducing those results, please checkout the [v0.1](https://github.com/facebookresearch/mmf/releases/tag/v0.1) release.
+**Note** that, for simplicity, our current released model **does not** incorporate extensive data augmentations (e.g. visual genome, visual dialogue) during training, which was used in our challenge winner entries for VQA and VizWiz 2018. As a result, there can be some performance gap to models reported and released previously. If you are looking for reproducing those results, please checkout the [v0.1](https://github.com/facebookresearch/multimodelity/releases/tag/v0.1) release.

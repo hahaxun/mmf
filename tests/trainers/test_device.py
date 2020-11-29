@@ -2,8 +2,8 @@
 import unittest
 
 import torch
-from mmf.trainers.core.device import TrainerDeviceMixin
-from mmf.utils.general import get_current_device
+from multimodelity.trainers.core.device import TrainerDeviceMixin
+from multimodelity.utils.general import get_current_device
 from omegaconf import OmegaConf
 
 

@@ -8,10 +8,10 @@ import tempfile
 import unittest
 from typing import Optional
 
-from mmf.common.registry import registry
-from mmf.utils.configuration import Configuration
-from mmf.utils.file_io import PathManager
-from mmf.utils.logger import setup_logger, setup_output_folder
+from multimodelity.common.registry import registry
+from multimodelity.utils.configuration import Configuration
+from multimodelity.utils.file_io import PathManager
+from multimodelity.utils.logger import setup_logger, setup_output_folder
 
 
 class TestLogger(unittest.TestCase):

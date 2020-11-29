@@ -6,13 +6,13 @@ sidebar_label: TextVQA Challenge
 
 TextVQA Challenge is available at [this link](https://textvqa.org/challenge/).
 
-In MMF, we provide the starter code for various baseline models for this challenge. TextVQA dataset will also be automatically downloaded during first training.
+In multimodelity, we provide the starter code for various baseline models for this challenge. TextVQA dataset will also be automatically downloaded during first training.
 
 In this tutorial, we provide steps for running training and evaluation with M4C model on TextVQA dataset and generating submission file for the challenge. The same steps can be used for other models.
 
 ## Installation
 
-Follow the prerequisites for installation of mmf [here](https://mmf.sh/docs/getting_started/installation).
+Follow the prerequisites for installation of multimodelity [here](https://multimodelity.sh/docs/getting_started/installation).
 
 ## Training and Evaluation
 
@@ -21,7 +21,7 @@ Follow the prerequisites for installation of mmf [here](https://mmf.sh/docs/gett
 For running training on `train` set, run the following command:
 
 ```bash
-mmf_run config=projects/m4c/configs/textvqa/defaults.yaml \
+multimodelity_run config=projects/m4c/configs/textvqa/defaults.yaml \
     datasets=textvqa \
     model=m4c \
     run_type=train
@@ -34,7 +34,7 @@ This will train the `m4c` model on the dataset and generate the checkpoints and 
 Next run evaluation on the validation `val` set:
 
 ```bash
-mmf_run config=projects/m4c/configs/textvqa/defaults.yaml \
+multimodelity_run config=projects/m4c/configs/textvqa/defaults.yaml \
     datasets=textvqa \
     model=m4c \
     run_type=val \
@@ -63,10 +63,10 @@ After we trained the model and evaluated on the validation set, we will generate
 ]
 ```
 
-With MMF you can directly generate the predictions in the required submission format with the following command:
+With multimodelity you can directly generate the predictions in the required submission format with the following command:
 
 ```bash
-mmf_predict config=projects/m4c/configs/textvqa/defaults.yaml \
+multimodelity_predict config=projects/m4c/configs/textvqa/defaults.yaml \
     datasets=textvqa \
     model=m4c \
     run_type=test \
@@ -90,4 +90,4 @@ Next you can upload the generated json file to EvalAI page for TextVQA [here](ht
 
 To check your results, you can go in 'My submissions' section and select 'Validation Phase' and click on 'Result file'.
 
-Now, you can either edit the M4C model to create your own model on top of it or create your own model inside MMF to beat M4C in challenge.
+Now, you can either edit the M4C model to create your own model on top of it or create your own model inside multimodelity to beat M4C in challenge.

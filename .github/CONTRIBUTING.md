@@ -1,4 +1,4 @@
-# Contributing to MMF
+# Contributing to multimodelity
 We want to make contributing to this project as easy and transparent as
 possible.
 
@@ -30,8 +30,8 @@ open up an issue before sending a PR to involve and discuss with maintainers if 
 
 We take the following factors into consideration before accepting features and PRs:
 
-1. If the feature can be achieved without modifying MMF. MMF is designed so that you can implement extensions from the outside, e.g. [Hateful Memes ConcatVL example](https://github.com/apsdehal/hm_example_mmf).
-  * If something is not extensible, please open up an issue so we can improve MMF together.
+1. If the feature can be achieved without modifying multimodelity. multimodelity is designed so that you can implement extensions from the outside, e.g. [Hateful Memes ConcatVL example](https://github.com/apsdehal/hm_example_multimodelity).
+  * If something is not extensible, please open up an issue so we can improve multimodelity together.
 1. Whether the feature is potentially useful to a large audience (e.g. an impactful paper, a popular dataset, a significant speedup or a widely useful utility).
 1. Whether the proposed solution has a good design/interface. This can be discussed in the issues prior to the PRs, or in the form of a draft PR and we will help you make it better.
 1. Whether the proposed solution adds extra overhead to users who don't need such feature.
@@ -48,15 +48,15 @@ We take the following factors into consideration before accepting features and P
     * Update the documentation. We use the [Google style docstrings](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html) in python.
     * Ensure backwards compatibility.
 1. Ensure the test suite passes.
-1. If the PR involves adding (i) a new dataset: update the dataset zoo to enable automatic downloads (ii) a new model: you don't need to update the model zoo, but make sure to describe your results and experiments in PR description. Also, update the list of the [models](https://mmf.sh/docs/notes/model_zoo/) and the [datasets](https://mmf.sh/docs/notes/dataset_zoo/) in the documentation accordingly.
-1. Follow [commit guidelines](#commit-guidelines) to ensure your commit message follows MMF style.
+1. If the PR involves adding (i) a new dataset: update the dataset zoo to enable automatic downloads (ii) a new model: you don't need to update the model zoo, but make sure to describe your results and experiments in PR description. Also, update the list of the [models](https://multimodelity.sh/docs/notes/model_zoo/) and the [datasets](https://multimodelity.sh/docs/notes/dataset_zoo/) in the documentation accordingly.
+1. Follow [commit guidelines](#commit-guidelines) to ensure your commit message follows multimodelity style.
 1. If you haven't already, complete the Contributor License Agreement ("CLA").
 
 
 
 ## Coding Style
 * In your editor, install the [editorconfig](https://editorconfig.org/) extension which should ensure that you are following the same standards as us.
-* MMF uses pre-commit hooks to ensure style consistency and prevent common mistakes. Enable it by:
+* multimodelity uses pre-commit hooks to ensure style consistency and prevent common mistakes. Enable it by:
 
 ```sh
 pip install pre-commit && pre-commit install
@@ -64,15 +64,15 @@ pip install pre-commit && pre-commit install
 
 After this pre-commit hooks will be run before every commit.
 
-* Read the [editorconfig](https://github.com/facebookresearch/mmf/blob/master/.editorconfig) file to understand the exact coding style preferences.
+* Read the [editorconfig](https://github.com/facebookresearch/multimodelity/blob/master/.editorconfig) file to understand the exact coding style preferences.
 
 * Ideally, black and isort should be run via pre-commit hooks.
 But if for some reason you want to run black and isort separately follow this:
 
 ```
 pip install black==19.3b0 isort==4.3.21
-black ./(mmf|tests|tools)/**/*.py
-isort -rc (mmf|tests|tools)
+black ./(multimodelity|tests|tools)/**/*.py
+isort -rc (multimodelity|tests|tools)
 ```
 ## Commit Guidelines
 
@@ -105,5 +105,5 @@ generation
 
 
 ## License
-By contributing to MMF, you agree that your contributions will be licensed
+By contributing to multimodelity, you agree that your contributions will be licensed
 under the LICENSE file in the root directory of this source tree.

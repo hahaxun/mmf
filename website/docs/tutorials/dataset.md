@@ -6,11 +6,11 @@ sidebar_label: Adding a dataset
 
 **[Outdated]** A new version of this will be uploaded soon
 
-# MMF
+# multimodelity
 
-This is a tutorial on how to add a new dataset to MMF.
+This is a tutorial on how to add a new dataset to multimodelity.
 
-MMF is agnostic to kind of datasets that can be added to it. On high level, adding a dataset requires 4 main components.
+multimodelity is agnostic to kind of datasets that can be added to it. On high level, adding a dataset requires 4 main components.
 
 - Dataset Builder
 - Default Configuration
@@ -21,7 +21,7 @@ In most of the cases, you should be able to inherit one of the existing datasets
 
 # Dataset Builder
 
-Builder creates and returns an instance of :class:`mmf.datasets.base_dataset.BaseDataset` which is inherited from `torch.utils.data.dataset.Dataset`. Any builder class in MMF needs to be inherited from :class:`mmf.datasets.base_dataset_builder.BaseDatasetBuilder`. |BaseDatasetBuilder| requires user to implement following methods after inheriting the class.
+Builder creates and returns an instance of :class:`multimodelity.datasets.base_dataset.BaseDataset` which is inherited from `torch.utils.data.dataset.Dataset`. Any builder class in multimodelity needs to be inherited from :class:`multimodelity.datasets.base_dataset_builder.BaseDatasetBuilder`. |BaseDatasetBuilder| requires user to implement following methods after inheriting the class.
 
 - `__init__(self):`
 
@@ -35,7 +35,7 @@ This function loads the dataset, builds an object of class inheriting |BaseDatas
 
 This function actually builds the data required for initializing the dataset for the first time. For e.g. if you need to download some data for your dataset, this all should be done inside this function.
 
-Finally, you need to register your dataset builder with a key to registry using `mmf.common.registry.registry.register_builder("key")`.
+Finally, you need to register your dataset builder with a key to registry using `multimodelity.common.registry.registry.register_builder("key")`.
 
 That's it, that's all you require for inheriting |BaseDatasetBuilder|.
 
@@ -51,11 +51,11 @@ Let's write down this using example of _CLEVR_ dataset.
 
     from collections import Counter
 
-    from mmf.common.registry import registry
-    from mmf.datasets.base_dataset_builder import BaseDatasetBuilder
+    from multimodelity.common.registry import registry
+    from multimodelity.datasets.base_dataset_builder import BaseDatasetBuilder
     # Let's assume for now that we have a dataset class called CLEVRDataset
-    from mmf.datasets.builders.clevr.dataset import CLEVRDataset
-    from mmf.utils.general import download_file, get_mmf_root
+    from multimodelity.datasets.builders.clevr.dataset import CLEVRDataset
+    from multimodelity.utils.general import download_file, get_multimodelity_root
 
 
     logger = logging.getLogger(__name__)
@@ -74,7 +74,7 @@ Let's write down this using example of _CLEVR_ dataset.
 
         def build(self, config, dataset):
             download_folder = os.path.join(
-                get_mmf_root(), config.data_dir, config.data_folder
+                get_multimodelity_root(), config.data_dir, config.data_folder
             )
 
             file_name = self.DOWNLOAD_URL.split("/")[-1]
@@ -110,7 +110,7 @@ Let's write down this using example of _CLEVR_ dataset.
         def update_registry_for_model(self, config):
             # Register both vocab (question and answer) sizes to registry for easy access to the
             # models. update_registry_for_model function if present is automatically called by
-            # MMF
+            # multimodelity
             registry.register(
                 self.dataset_name + "_text_vocab_size",
                 self.dataset.text_processor.get_vocab_size(),
@@ -122,9 +122,9 @@ Let's write down this using example of _CLEVR_ dataset.
 
 # Default Configuration
 
-Some things to note about MMF's configuration:
+Some things to note about multimodelity's configuration:
 
-- Each dataset in MMF has its own default configuration which is usually under this structure `mmf/common/defaults/configs/datasets/[task]/[dataset].yaml` where `task` is the task your dataset belongs to.
+- Each dataset in multimodelity has its own default configuration which is usually under this structure `multimodelity/common/defaults/configs/datasets/[task]/[dataset].yaml` where `task` is the task your dataset belongs to.
 - These dataset configurations can be then included by the user in their end config using `includes` directive
 - This allows easy multi-tasking and management of configurations and user can also override the default configurations easily in their own config
 
@@ -168,7 +168,7 @@ Here, is a default configuration for CLEVR needed based on our dataset and build
                     - "?"
                     - "."
             processors:
-            # The processors will be assigned to the datasets automatically by MMF
+            # The processors will be assigned to the datasets automatically by multimodelity
             # For example if key is text_processor, you can access that processor inside
             # dataset object using self.text_processor
                 text_processor:
@@ -193,13 +193,13 @@ Here, is a default configuration for CLEVR needed based on our dataset and build
                             type: simple_word
                             params: {}
 
-For processors, check :class:`mmf.datasets.processors` to understand how to create a processor and different processors that are already available in MMF.
+For processors, check :class:`multimodelity.datasets.processors` to understand how to create a processor and different processors that are already available in multimodelity.
 
 # Dataset Class
 
 Next step is to actually build a dataset class which inherits |BaseDataset| so it can interact with PyTorch dataloaders. Follow the steps below to inherit and create your dataset's class.
 
-- Inherit :class:`mmf.datasets.base_dataset.BaseDataset`
+- Inherit :class:`multimodelity.datasets.base_dataset.BaseDataset`
 - Implement `__init__(self, config, dataset)`. Call parent's init using `super().__init__("name", config, dataset)` where "name" is the string representing the name of your dataset.
 - Implement `__getitem__(self, idx)`, our replacement for normal `__getitem__(self, idx)` you would implement for a torch dataset. This needs to return an object of class :class:Sample.
 - Implement `__len__(self)` method, which represents size of your dataset.
@@ -219,18 +219,18 @@ Next step is to actually build a dataset class which inherits |BaseDataset| so i
 
     from PIL import Image
 
-    from mmf.common.registry import registry
-    from mmf.common.sample import Sample
-    from mmf.datasets.base_dataset import BaseDataset
-    from mmf.utils.general import get_mmf_root
-    from mmf.utils.text import VocabFromText, tokenize
+    from multimodelity.common.registry import registry
+    from multimodelity.common.sample import Sample
+    from multimodelity.datasets.base_dataset import BaseDataset
+    from multimodelity.utils.general import get_multimodelity_root
+    from multimodelity.utils.text import VocabFromText, tokenize
 
 
     class CLEVRDataset(BaseDataset):
         def __init__(self, config, dataset, data_folder=None, *args, **kwargs):
             super().__init__("clevr", config, dataset)
             self._data_folder = data_folder
-            self._data_dir = os.path.join(get_mmf_root(), config.data_dir)
+            self._data_dir = os.path.join(get_multimodelity_root(), config.data_dir)
 
             if not self._data_folder:
                 self._data_folder = os.path.join(self._data_dir, config.data_folder)
@@ -281,7 +281,7 @@ Next step is to actually build a dataset class which inherits |BaseDataset| so i
         def __getitem__(self, idx):
             # Get item is like your normal __getitem__ in PyTorch Dataset. Based on id
             # return a sample. Check VQA2Dataset implementation if you want to see how
-            # to do caching in MMF
+            # to do caching in multimodelity
             data = self.questions[idx]
 
             # Each call to __getitem__ from dataloader returns a Sample class object which
@@ -300,7 +300,7 @@ Next step is to actually build a dataset class which inherits |BaseDataset| so i
 
             processed = self.answer_processor({"answers": [data["answer"]]})
             # Now add answers and then the targets. We normally use "targets" for what
-            # should be the final output from the model in MMF
+            # should be the final output from the model in multimodelity
             current_sample.answers = processed["answers"]
             current_sample.targets = processed["answers_scores"]
 
@@ -310,13 +310,13 @@ Next step is to actually build a dataset class which inherits |BaseDataset| so i
             # Process and add image as a tensor
             current_sample.image = torch.from_numpy(image.transpose(2, 0, 1))
 
-            # Return your sample and MMF will automatically convert it to SampleList before
+            # Return your sample and multimodelity will automatically convert it to SampleList before
             # passing to the model
             return current_sample
 
 # Metrics
 
-For your dataset to be compatible out of the box, it is a good practice to also add the metrics your dataset requires. All metrics for now go inside `MMF/modules/metrics.py`. All metrics inherit |BaseMetric| and implement a function `calculate` with signature `calculate(self, sample_list, model_output, *args, **kwargs)` where `sample_list` (|SampleList|) is the current batch and `model_output` is a dict return by your model for current `sample_list`. Normally, you should define the keys you want inside `model_output` and `sample_list`. Finally, you should register your metric to registry using `@registry.register_metric('[key]')` where '[key]' is the key for your metric. Here is a sample implementation of accuracy metric used in CLEVR dataset:
+For your dataset to be compatible out of the box, it is a good practice to also add the metrics your dataset requires. All metrics for now go inside `multimodelity/modules/metrics.py`. All metrics inherit |BaseMetric| and implement a function `calculate` with signature `calculate(self, sample_list, model_output, *args, **kwargs)` where `sample_list` (|SampleList|) is the current batch and `model_output` is a dict return by your model for current `sample_list`. Normally, you should define the keys you want inside `model_output` and `sample_list`. Finally, you should register your metric to registry using `@registry.register_metric('[key]')` where '[key]' is the key for your metric. Here is a sample implementation of accuracy metric used in CLEVR dataset:
 
 .. code-block: python
 
@@ -358,6 +358,6 @@ For your dataset to be compatible out of the box, it is a good practice to also 
             value = correct / total
             return value
 
-These are the common steps you need to follow when you are adding a dataset to MMF.
+These are the common steps you need to follow when you are adding a dataset to multimodelity.
 
-.. |BaseDatasetBuilder| replace:: :class:`~mmf.datasets.base_dataset_builder.BaseDatasetBuilder` .. |BaseDataset| replace:: :class:`~mmf.datasets.base_dataset.BaseDataset` .. |SampleList| replace:: :class:`~mmf.common.sample.SampleList` .. |BaseMetric| replace:: :class:`~mmf.modules.metrics.BaseMetric`
+.. |BaseDatasetBuilder| replace:: :class:`~multimodelity.datasets.base_dataset_builder.BaseDatasetBuilder` .. |BaseDataset| replace:: :class:`~multimodelity.datasets.base_dataset.BaseDataset` .. |SampleList| replace:: :class:`~multimodelity.common.sample.SampleList` .. |BaseMetric| replace:: :class:`~multimodelity.modules.metrics.BaseMetric`

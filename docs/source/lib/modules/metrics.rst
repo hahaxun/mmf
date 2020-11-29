@@ -1,5 +1,5 @@
 modules.metrics
 ===============
 
-.. automodule:: mmf.modules.metrics
+.. automodule:: multimodelity.modules.metrics
   :members:

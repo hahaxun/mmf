@@ -8,13 +8,13 @@ from copy import deepcopy
 from unittest.mock import Mock
 
 import torch
-from mmf.common.meter import Meter
-from mmf.common.registry import registry
-from mmf.common.report import Report
-from mmf.models.base_model import BaseModel
-from mmf.trainers.callbacks.logistics import LogisticsCallback
-from mmf.utils.file_io import PathManager
-from mmf.utils.logger import setup_logger
+from multimodelity.common.meter import Meter
+from multimodelity.common.registry import registry
+from multimodelity.common.report import Report
+from multimodelity.models.base_model import BaseModel
+from multimodelity.trainers.callbacks.logistics import LogisticsCallback
+from multimodelity.utils.file_io import PathManager
+from multimodelity.utils.logger import setup_logger
 from omegaconf import OmegaConf
 
 

@@ -7,7 +7,7 @@ jobs:
   lint:
     # We want to run on external PRs, but not on our own internal PRs as they'll be run
     # by the push to the branch.
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'facebookresearch/mmf'
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'facebookresearch/multimodelity'
     strategy:
       fail-fast: false
       max-parallel: 3
@@ -22,7 +22,7 @@ jobs:
     - name: Setup Conda Environment
       uses: goanpeca/setup-miniconda@v1
       with:
-        activate-environment: mmf
+        activate-environment: multimodelity
         python-version: 3.7
         auto-update-conda: true
         use-only-tar-bz2: true
@@ -30,7 +30,7 @@ jobs:
     - name: Install Dependencies
       shell: bash -l {0}
       run: |
-        conda activate mmf
+        conda activate multimodelity
         python -m pip install --upgrade pip
         pip install --progress-bar off flake8==3.7.9
         pip install --progress-bar off isort[pyproject]==4.3.21
@@ -40,7 +40,7 @@ jobs:
       shell: bash -l {0}
       if: matrix.lint == 'flake8'
       run: |
-        conda activate mmf
+        conda activate multimodelity
         flake8 --version
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F72,F82 --show-source --statistics
@@ -51,7 +51,7 @@ jobs:
       shell: bash -l {0}
       if: matrix.lint == 'isort'
       run: |
-        conda activate mmf
+        conda activate multimodelity
         isort --version
         isort -c -sp .
 
@@ -59,6 +59,6 @@ jobs:
       shell: bash -l {0}
       if: matrix.lint == 'black'
       run: |
-        conda activate mmf
+        conda activate multimodelity
         black --version
         black --check .

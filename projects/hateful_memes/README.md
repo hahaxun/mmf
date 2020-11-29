@@ -1,6 +1,6 @@
 # Hateful Memes Dataset
 
-This folder contains configs required to reproduce results and baselines in the [Hateful Memes challenge paper](https://arxiv.org/abs/2005.04790). For details on participation in the challenge, please look at our [Hateful Memes Challenge tutorial](https://mmf.sh/docs/challenges/hateful_memes_challenge).
+This folder contains configs required to reproduce results and baselines in the [Hateful Memes challenge paper](https://arxiv.org/abs/2005.04790). For details on participation in the challenge, please look at our [Hateful Memes Challenge tutorial](https://multimodelity.sh/docs/challenges/hateful_memes_challenge).
 
 Please cite the following paper if you use these models and the hateful memes dataset:
 
@@ -14,21 +14,21 @@ Please cite the following paper if you use these models and the hateful memes da
   year={2020}
 }
 ```
-* [Citation for MMF](https://github.com/facebookresearch/mmf/tree/master/README.md#citation)
+* [Citation for multimodelity](https://github.com/facebookresearch/multimodelity/tree/master/README.md#citation)
 
 Links: [[arxiv]](https://arxiv.org/abs/2005.04790) [[challenge]](https://www.drivendata.org/competitions/70/hateful-memes-phase-2/) [[blog post]](https://ai.facebook.com/blog/hateful-memes-challenge-and-data-set)
 
 ## Prerequisites
 
-Install MMF following the [installation docs](https://mmf.sh/docs/getting_started/installation/).
+Install multimodelity following the [installation docs](https://multimodelity.sh/docs/getting_started/installation/).
 
 
-To acquire the data, you will need to register at DrivenData's Hateful Memes Competition and download data from the challenge's [download page](https://www.drivendata.org/competitions/70/hateful-memes-phase-2/data/). MMF won't be able to automatically download the data since you manually need to agree to the licensing terms. Follow the steps below to convert data into MMF format.
+To acquire the data, you will need to register at DrivenData's Hateful Memes Competition and download data from the challenge's [download page](https://www.drivendata.org/competitions/70/hateful-memes-phase-2/data/). multimodelity won't be able to automatically download the data since you manually need to agree to the licensing terms. Follow the steps below to convert data into multimodelity format.
 
 1. Download the zip file with data from DrivenData at location `x`.
 2. Note the password from the data download page at DrivenData as `y`
-3. Run `mmf_convert_hm --zip_file=x --password=y` where you replace `x` with location of your zip file and `y` with the password you noted.
-4. Previous command will unzip and format your files into MMF format. This command can take time while unzipping.
+3. Run `multimodelity_convert_hm --zip_file=x --password=y` where you replace `x` with location of your zip file and `y` with the password you noted.
+4. Previous command will unzip and format your files into multimodelity format. This command can take time while unzipping.
 5. Continue, with steps below.
 
 > NOTE: If the command fails with checksum failed, please use `--bypass_checksum=1` option to try without checksum.
@@ -54,14 +54,14 @@ In the table, we provide configuration corresponding to each of the baselines in
 | Visual BERT COCO | visual_bert    | visual_bert.finetuned.hateful_memes.from_coco    | projects/hateful_memes/configs/visual_bert/from_coco.yaml  |
 
 
-For individual baselines and their proper citation have a look at their project pages: [[Visual BERT]](https://github.com/facebookresearch/mmf/tree/master/projects/visual_bert) [[VilBERT]](https://github.com/facebookresearch/mmf/tree/master/projects/vilbert) [[MMBT]](https://github.com/facebookresearch/mmf/tree/master/projects/mmbt)
+For individual baselines and their proper citation have a look at their project pages: [[Visual BERT]](https://github.com/facebookresearch/multimodelity/tree/master/projects/visual_bert) [[VilBERT]](https://github.com/facebookresearch/multimodelity/tree/master/projects/vilbert) [[MMBT]](https://github.com/facebookresearch/multimodelity/tree/master/projects/mmbt)
 
 ## Training
 
-Run the following the command, and in general follow MMF's [configuration](https://mmf.sh/docs/notes/configuration) principles to update any parameter if needed:
+Run the following the command, and in general follow multimodelity's [configuration](https://multimodelity.sh/docs/notes/configuration) principles to update any parameter if needed:
 
 ```
-mmf_run config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes
+multimodelity_run config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes
 ```
 
 This will save the training outputs to an experiment folder under `./save` directory (if not overriden using `env.save_dir`) while running training. The final best model will be saved as `<REPLACE_WITH_MODEL_KEY>_final.pth` inside the experiment folder.
@@ -70,7 +70,7 @@ This will save the training outputs to an experiment folder under `./save` direc
 
 For running evaluation on validation set run the following command:
 ```
-mmf_run config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
+multimodelity_run config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
 run_type=val checkpoint.resume_file=<path_to_best_trained_model> checkpoint.resume_pretrained=False
 ```
 
@@ -81,18 +81,18 @@ run_type=val checkpoint.resume_file=<path_to_best_trained_model> checkpoint.resu
 For running inference (will generate a csv) on validation set run the following command:
 
 ```
-mmf_predict config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
+multimodelity_predict config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
 run_type=val checkpoint.resume_file=<path_to_best_trained_model> checkpoint.resume_pretrained=False
 ```
 
 For running inference (will generate a csv) on test set run the following command:
 
 ```
-mmf_predict config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
+multimodelity_predict config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
 run_type=test checkpoint.resume_file=<path_to_best_trained_model> checkpoint.resume_pretrained=False
 ```
 
-**NOTE**: All `mmf_predict` commands for the Hateful Memes challenge will generate a csv which you can then submit to DrivenData.
+**NOTE**: All `multimodelity_predict` commands for the Hateful Memes challenge will generate a csv which you can then submit to DrivenData.
 
 ### Predicting for Phase 1
 
@@ -110,7 +110,7 @@ This will load the phase 1 files for you and evaluate those.
 For evaluating pretrained models on validation set, use the following command:
 
 ```
-mmf_run config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
+multimodelity_run config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
 run_type=val checkpoint.resume_zoo=<REPLACE_WITH_PRETRAINED_ZOO_KEY> checkpoint.resume_pretrained=False
 ```
 
@@ -118,7 +118,7 @@ To generate predictions using pretrained models, use the following command:
 
 
 ```
-mmf_predict config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
+multimodelity_predict config=<REPLACE_WITH_BASELINE_CONFIG> model=<REPLACE_WITH_MODEL_KEY> dataset=hateful_memes \
 run_type=test checkpoint.resume_zoo=<REPLACE_WITH_PRETRAINED_ZOO_KEY> checkpoint.resume_pretrained=False
 ```
 
@@ -127,7 +127,7 @@ run_type=test checkpoint.resume_zoo=<REPLACE_WITH_PRETRAINED_ZOO_KEY> checkpoint
 It is also possible to load a pretrained model directly in your code, use:
 
 ```
-from mmf.common.registry import registry
+from multimodelity.common.registry import registry
 
 model_cls = registry.get_model_class("<DESIRED_MODEL_KEY">)
 model = model_cls.from_pretrained("<DESIRED_PRETRAINED_ZOO_KEY>")
@@ -135,4 +135,4 @@ model = model_cls.from_pretrained("<DESIRED_PRETRAINED_ZOO_KEY>")
 
 ## Questions/Feedback?
 
-Please open up an [issue on MMF](https://github.com/facebookresearch/mmf/issues/new/choose).
+Please open up an [issue on multimodelity](https://github.com/facebookresearch/multimodelity/issues/new/choose).

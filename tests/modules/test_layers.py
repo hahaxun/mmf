@@ -4,7 +4,7 @@ import operator
 import random
 import unittest
 
-import mmf.modules.layers as layers
+import multimodelity.modules.layers as layers
 import numpy as np
 import torch
 from omegaconf import OmegaConf

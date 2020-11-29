@@ -1,5 +1,5 @@
 includes:
-- ../../../mmf/configs/vizwiz/defaults.yaml
+- ../../../multimodelity/configs/vizwiz/defaults.yaml
 
 evaluation:
   metrics:

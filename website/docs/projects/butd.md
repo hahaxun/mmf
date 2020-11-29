@@ -4,7 +4,7 @@ sidebar_label: BUTD
 title: BUTD
 ---
 
-This is a tutorial for running the BUTD model available in MMF. This model was released originally under this ([repo](https://github.com/peteanderson80/bottom-up-attention)). Please cite the following paper if you are using BUTD model from mmf:
+This is a tutorial for running the BUTD model available in multimodelity. This model was released originally under this ([repo](https://github.com/peteanderson80/bottom-up-attention)). Please cite the following paper if you are using BUTD model from multimodelity:
 
 * Anderson, P., He, X., Buehler, C., Teney, D., Johnson, M., Gould, S., & Zhang, L. (2018). *Bottom-up and top-down attention for image captioning and visual question answering*. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 6077-6086). ([arXiV](https://arxiv.org/abs/1707.07998))
 ```
@@ -19,7 +19,7 @@ This is a tutorial for running the BUTD model available in MMF. This model was r
 
 ## Installation
 
-Install MMF following the [installation guide](https://mmf.sh/docs/getting_started/installation/).
+Install multimodelity following the [installation guide](https://multimodelity.sh/docs/getting_started/installation/).
 
 ## Data Setup
 
@@ -30,7 +30,7 @@ For training the BUTD model on COCO captions we use the Karpathy splits. Annotat
 To train BUTD model on the COCO karpathy train split, run:
 
 ```bash
-mmf_run config=projects/butd/configs/coco/defaults.yaml \
+multimodelity_run config=projects/butd/configs/coco/defaults.yaml \
     model=butd \
     dataset=coco \
     run_type=train
@@ -41,7 +41,7 @@ this will save the trained model `butd_final.pth` in your `./save` directory for
 To evaluate the trained model on the COCO val set, run:
 
 ```bash
-mmf_run config=projects/butd/configs/coco/defaults.yaml \
+multimodelity_run config=projects/butd/configs/coco/defaults.yaml \
     model=butd \
     dataset=coco \
     run_type=val \
@@ -54,7 +54,7 @@ BUTD evaluation can also be done with two other decoding variants with the same 
 - Nucleus Sampling Decoding (`projects/butd/configs/coco/nucleus_sampling.yaml`)
 
 ```bash
-mmf_run config=projects/butd/configs/coco/beam_search.yaml \
+multimodelity_run config=projects/butd/configs/coco/beam_search.yaml \
     model=butd \
     dataset=coco \
     run_type=val \
@@ -67,7 +67,7 @@ mmf_run config=projects/butd/configs/coco/beam_search.yaml \
 To generate the coco captions prediction file for Karpathy `val` or `test` splits, run:
 
 ```bash
-mmf_predict config=projects/butd/configs/coco/beam_search.yaml \
+multimodelity_predict config=projects/butd/configs/coco/beam_search.yaml \
     model=butd \
     dataset=coco \
     run_type=val \
@@ -91,7 +91,7 @@ Evaluation predictions can only be generated using either `beam_search` or `nucl
 To generate predictions with the pretrained BUTD model on COCO Karpathy `val` set (assuming that the pretrained model that you are evaluating is `butd`), run:
 
 ```bash
-mmf_predict config=projects/butd/configs/coco/beam_search.yaml \
+multimodelity_predict config=projects/butd/configs/coco/beam_search.yaml \
     model=butd \
     dataset=coco \
     run_type=val \
@@ -100,6 +100,6 @@ mmf_predict config=projects/butd/configs/coco/beam_search.yaml \
 
 :::tip
 
-Follow [checkpointing](https://mmf.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in MMF
+Follow [checkpointing](https://multimodelity.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in multimodelity
 
 :::

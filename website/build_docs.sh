@@ -9,7 +9,7 @@
 usage() {
   echo "Usage: $0 [-b] [-o]"
   echo ""
-  echo "Build MMF documentation. Must be executed from root of MMF repository."
+  echo "Build multimodelity documentation. Must be executed from root of multimodelity repository."
   echo ""
   echo "  -b   Build static version of documentation (otherwise start server)."
   echo "  -o   Only Docusaurus (skip Sphinx, tutorials). Useful when just make change to Docusaurus settings."

@@ -1,6 +1,6 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
 
-# Copied from fairseq. Mostly written by @myleott. Adapted accordingly for mmf
+# Copied from fairseq. Mostly written by @myleott. Adapted accordingly for multimodelity
 import argparse
 import datetime
 import os
@@ -87,7 +87,7 @@ def get_args():
         )
         parser.add_argument(
             "--workflow",
-            default="faim.mmf_run.train_workflow@faim",
+            default="faim.multimodelity_run.train_workflow@faim",
             help="fblearner workflow name",
         )
         parser.add_argument(

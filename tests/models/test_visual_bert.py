@@ -4,11 +4,11 @@ import unittest
 
 import tests.test_utils as test_utils
 import torch
-from mmf.common.sample import SampleList
-from mmf.modules.hf_layers import replace_with_jit
-from mmf.utils.build import build_model
-from mmf.utils.configuration import Configuration
-from mmf.utils.env import setup_imports
+from multimodelity.common.sample import SampleList
+from multimodelity.modules.hf_layers import replace_with_jit
+from multimodelity.utils.build import build_model
+from multimodelity.utils.configuration import Configuration
+from multimodelity.utils.env import setup_imports
 
 
 BERT_VOCAB_SIZE = 30255

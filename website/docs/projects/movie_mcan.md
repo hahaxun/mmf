@@ -4,7 +4,7 @@ sidebar_label: Movie+MCAN (VQA 2020 Winner)
 title: MoViE+MCAN (VQA 2020 Challenge Winner)
 ---
 
-This is a tutorial for running the MoViE+MCAN model which won the VQA Challenge at CVPR 2020. The winning team comprised of Nguyen, D. K., Jiang, H., Goswami, V., Yu. L. & Chen, X. MoViE+MCAN model is derived from the following papers, and is released under the MMF. Please cite both these papers if you use the model or the grid features used to train this model in your work:
+This is a tutorial for running the MoViE+MCAN model which won the VQA Challenge at CVPR 2020. The winning team comprised of Nguyen, D. K., Jiang, H., Goswami, V., Yu. L. & Chen, X. MoViE+MCAN model is derived from the following papers, and is released under the multimodelity. Please cite both these papers if you use the model or the grid features used to train this model in your work:
 
 * Nguyen, D. K., Goswami, V., & Chen, X. (2020). *Revisiting Modulated Convolutions for Visual Counting and Beyond*. arXiv preprint arXiv:2004.11883. ([arXiV](https://arxiv.org/abs/2004.11883))
 ```
@@ -31,7 +31,7 @@ and
 
 ## Installation
 
-Install MMF following the [installation guide](https://mmf.sh/docs/getting_started/installation/).
+Install multimodelity following the [installation guide](https://multimodelity.sh/docs/getting_started/installation/).
 
 ## Data Setup
 
@@ -42,7 +42,7 @@ Annotations and features for VQA2.0 and VisualGenome will be automatically downl
 To train MoViE+MCAN model on the VQA2.0 + Visual Genome dataset, run:
 
 ```bash
-mmf_run config=projects/movie_mcan/configs/vqa2/defaults.yaml \
+multimodelity_run config=projects/movie_mcan/configs/vqa2/defaults.yaml \
     model=movie_mcan \
     dataset=vqa2 \
     run_type=train
@@ -53,7 +53,7 @@ this will save the trained model `movie_mcan_final.pth` in your `./save` directo
 To evaluate the trained model on the VQA2.0 val set, run:
 
 ```bash
-mmf_run config=projects/movie_mcan/configs/vqa2/defaults.yaml \
+multimodelity_run config=projects/movie_mcan/configs/vqa2/defaults.yaml \
     model=movie_mcan \
     dataset=vqa2 \
     run_type=val \
@@ -65,7 +65,7 @@ mmf_run config=projects/movie_mcan/configs/vqa2/defaults.yaml \
 To generate the vqa prediction file for Eval AI submission on `test-dev`, run:
 
 ```bash
-mmf_predict config=projects/movie_mcan/configs/vqa2/defaults.yaml \
+multimodelity_predict config=projects/movie_mcan/configs/vqa2/defaults.yaml \
     model=movie_mcan \
     dataset=vqa2 \
     run_type=test \
@@ -82,7 +82,7 @@ mmf_predict config=projects/movie_mcan/configs/vqa2/defaults.yaml \
 To generate predictions with the pretrained MoViE+MCAN model on VQA2.0 `test-dev` set (assuming that the pretrained model that you are evaluating is `movie_mcan.grid.vqa2_vg`), run:
 
 ```bash
-mmf_predict config=projects/movie_mcan/configs/vqa2/defaults.yaml \
+multimodelity_predict config=projects/movie_mcan/configs/vqa2/defaults.yaml \
   dataset=vqa2 \
   model=movie_mcan \
   run_type=test \
@@ -91,6 +91,6 @@ mmf_predict config=projects/movie_mcan/configs/vqa2/defaults.yaml \
 
 :::tip
 
-Follow [checkpointing](https://mmf.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in MMF
+Follow [checkpointing](https://multimodelity.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in multimodelity
 
 :::

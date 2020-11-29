@@ -1,7 +1,7 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
 import unittest
 
-import mmf.utils.distributed as distributed
+import multimodelity.utils.distributed as distributed
 
 
 class TestUtilsDistributed(unittest.TestCase):

@@ -3,9 +3,9 @@
 import unittest
 
 import tests.test_utils as test_utils
-from mmf.utils.build import build_model
-from mmf.utils.configuration import Configuration
-from mmf.utils.env import setup_imports
+from multimodelity.utils.build import build_model
+from multimodelity.utils.configuration import Configuration
+from multimodelity.utils.env import setup_imports
 
 
 BERT_VOCAB_SIZE = 30255
@@ -13,11 +13,11 @@ ROBERTA_VOCAB_SIZE = 50265
 XLM_ROBERTA_VOCAB_SIZE = 250002
 
 
-class TestMMFTransformerTorchscript(unittest.TestCase):
+class TestmultimodelityTransformerTorchscript(unittest.TestCase):
     def setUp(self):
         test_utils.setup_proxy()
         setup_imports()
-        self.model_name = "mmf_transformer"
+        self.model_name = "multimodelity_transformer"
         args = test_utils.dummy_args(model=self.model_name)
         configuration = Configuration(args)
         self.config = configuration.get_config()

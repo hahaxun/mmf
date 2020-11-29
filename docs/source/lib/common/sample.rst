@@ -1,5 +1,5 @@
 common.sample
 ===============
 
-.. automodule:: mmf.common.sample
+.. automodule:: multimodelity.common.sample
   :members:

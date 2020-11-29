@@ -4,7 +4,7 @@ title: Dataset Zoo
 sidebar_label: Dataset Zoo
 ---
 
-Here is the current list of datasets currently supported in MMF:
+Here is the current list of datasets currently supported in multimodelity:
 
 - **CLEVR** [Paper : CLEVR A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning][arxiv](https://arxiv.org/abs/1612.06890)]
 - **COCO Captions** [Paper : Microsoft COCO Captions: Data Collection and Evaluation Server][arxiv](https://arxiv.org/abs/1504.00325)]

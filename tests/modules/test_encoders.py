@@ -3,7 +3,7 @@
 import tempfile
 import unittest
 
-from mmf.modules import encoders
+from multimodelity.modules import encoders
 from tests.test_utils import setup_proxy
 from torch import nn
 

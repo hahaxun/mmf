@@ -7,12 +7,12 @@ import unittest
 from io import StringIO
 from unittest import mock
 
-import mmf.utils.download as download
+import multimodelity.utils.download as download
 import tests.test_utils as test_utils
 
 
 TEST_DOWNLOAD_URL = (
-    "https://dl.fbaipublicfiles.com/mmf/data/tests/visual_entailment_small.zip"
+    "https://dl.fbaipublicfiles.com/multimodelity/data/tests/visual_entailment_small.zip"
 )
 TEST_DOWNLOAD_SHASUM = (
     "e5831397710b71f58a02c243bb6e731989c8f37ef603aaf3ce18957ecd075bf5"
@@ -88,7 +88,7 @@ class TestUtilsDownload(unittest.TestCase):
                     resource.download_file(d)
                 mocked.assert_called_once_with(d)
 
-            with mock.patch("mmf.utils.download.download") as mocked:
+            with mock.patch("multimodelity.utils.download.download") as mocked:
                 with contextlib.redirect_stdout(StringIO()):
                     resource.download_file(d)
                 mocked.assert_called_once_with(
@@ -100,7 +100,7 @@ class TestUtilsDownload(unittest.TestCase):
                     resource.download_file(d)
                 self.assertTrue(mocked.call_count, 2)
 
-            with mock.patch("mmf.utils.download.download") as mocked:
+            with mock.patch("multimodelity.utils.download.download") as mocked:
                 resource._hashcode = "some_random_string"
                 with contextlib.redirect_stdout(StringIO()):
                     self.assertRaises(AssertionError, resource.download_file, d)

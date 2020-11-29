@@ -3,7 +3,7 @@
 import os
 import unittest
 
-from mmf.utils.general import get_mmf_root
+from multimodelity.utils.general import get_multimodelity_root
 
 
 def has_python_file(files):
@@ -26,9 +26,9 @@ def walk_and_assert_not_empty(folder):
 
 class TestQualityChecks(unittest.TestCase):
     def _test_quality_check(self, fn):
-        fn(get_mmf_root())
-        fn(os.path.join(get_mmf_root(), "..", "mmf_cli"))
-        fn(os.path.join(get_mmf_root(), "..", "tests"))
+        fn(get_multimodelity_root())
+        fn(os.path.join(get_multimodelity_root(), "..", "multimodelity_cli"))
+        fn(os.path.join(get_multimodelity_root(), "..", "tests"))
 
     def test_init_files_present(self):
         self._test_quality_check(walk_and_assert_init)

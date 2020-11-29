@@ -3,7 +3,7 @@ includes:
 - ../masked_vqa2/defaults.yaml
 
 model_config:
-  mmf_bert:
+  multimodelity_bert:
     training_head_type: pretraining,vqa
 
 scheduler:

@@ -4,14 +4,14 @@ import tempfile
 import unittest
 
 import torch
-from mmf.datasets.processors.processors import (
+from multimodelity.datasets.processors.processors import (
     CaptionProcessor,
     EvalAIAnswerProcessor,
     MultiClassFromFile,
     MultiHotAnswerFromVocabProcessor,
     TransformerBboxProcessor,
 )
-from mmf.utils.configuration import load_yaml
+from multimodelity.utils.configuration import load_yaml
 from omegaconf import OmegaConf
 
 from ..test_utils import compare_tensors
@@ -24,7 +24,7 @@ class TestDatasetProcessors(unittest.TestCase):
         return config
 
     def test_caption_processor(self):
-        config = self._get_config("../../../mmf/configs/datasets/coco/defaults.yaml")
+        config = self._get_config("../../../multimodelity/configs/datasets/coco/defaults.yaml")
         captioning_config = config.dataset_config.coco
         caption_processor_config = captioning_config.processors.caption_processor
 
@@ -47,7 +47,7 @@ class TestDatasetProcessors(unittest.TestCase):
         self.assertEqual(caption["caption"], "a man with a red helmet")
 
     def test_multi_hot_answer_from_vocab_processor(self):
-        config = self._get_config("../../../mmf/configs/datasets/clevr/defaults.yaml")
+        config = self._get_config("../../../multimodelity/configs/datasets/clevr/defaults.yaml")
         clevr_config = config.dataset_config.clevr
         answer_processor_config = clevr_config.processors.answer_processor
 

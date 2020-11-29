@@ -1,5 +1,5 @@
 models.base_model
 =================
 
-.. automodule:: mmf.models.base_model
+.. automodule:: multimodelity.models.base_model
   :members:

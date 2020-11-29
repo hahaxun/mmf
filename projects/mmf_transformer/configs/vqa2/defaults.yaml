@@ -1,5 +1,5 @@
 model_config:
-  mmf_transformer:
+  multimodelity_transformer:
     training_head_type: classification
     num_labels: 3129
     losses:

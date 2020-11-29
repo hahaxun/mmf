@@ -2,19 +2,19 @@
 import os
 import unittest
 
-import mmf.modules.metrics as metrics
+import multimodelity.modules.metrics as metrics
 import torch
-from mmf.common.registry import registry
-from mmf.common.sample import Sample
-from mmf.datasets.processors import CaptionProcessor
-from mmf.utils.configuration import load_yaml
+from multimodelity.common.registry import registry
+from multimodelity.common.sample import Sample
+from multimodelity.datasets.processors import CaptionProcessor
+from multimodelity.utils.configuration import load_yaml
 
 
 class TestModuleMetrics(unittest.TestCase):
     def test_caption_bleu4(self):
         path = os.path.join(
             os.path.abspath(__file__),
-            "../../../mmf/configs/datasets/coco/defaults.yaml",
+            "../../../multimodelity/configs/datasets/coco/defaults.yaml",
         )
         config = load_yaml(os.path.abspath(path))
         captioning_config = config.dataset_config.coco

@@ -6,13 +6,13 @@ sidebar_label: VQA Challenge
 
 VQA Challenge is available at [this link](https://visualqa.org/challenge.html).
 
-In MMF, we provide the starter code for various baseline models for this challenge. VQA2.0 dataset will also be automatically downloaded during first training.
+In multimodelity, we provide the starter code for various baseline models for this challenge. VQA2.0 dataset will also be automatically downloaded during first training.
 
 In this tutorial, we provide steps for running training and evaluation with VisualBERT model on VQA2.0 dataset and generating submission file for the challenge. The same steps can be used for other models.
 
 ## Installation
 
-Follow the prerequisites for installation of mmf [here](https://mmf.sh/docs/getting_started/installation).
+Follow the prerequisites for installation of multimodelity [here](https://multimodelity.sh/docs/getting_started/installation).
 
 ## Training and Evaluation
 
@@ -21,7 +21,7 @@ Follow the prerequisites for installation of mmf [here](https://mmf.sh/docs/gett
 For running training on train set, run the following command:
 
 ```bash
-mmf_run config=projects/visual_bert/configs/vqa2/defaults.yaml \
+multimodelity_run config=projects/visual_bert/configs/vqa2/defaults.yaml \
     model=visual_bert \
     dataset=vqa2 \
     run_type=train
@@ -34,7 +34,7 @@ This will train the `visual_bert` model on the dataset and generate the checkpoi
 Next run evaluation on the validation set:
 
 ```bash
-mmf_run config=projects/visual_bert/configs/vqa2/defaults.yaml \
+multimodelity_run config=projects/visual_bert/configs/vqa2/defaults.yaml \
     model=visual_bert \
     dataset=vqa2 \
     run_type=val \
@@ -63,10 +63,10 @@ After training the model and evaluated on the validation set, we will generate t
 ]
 ```
 
-With MMF you can directly generate the predictions in the required submission format with the following command:
+With multimodelity you can directly generate the predictions in the required submission format with the following command:
 
 ```bash
-mmf_predict config=projects/visual_bert/configs/vqa2/defaults.yaml \
+multimodelity_predict config=projects/visual_bert/configs/vqa2/defaults.yaml \
     model=visual_bert \
     dataset=vqa2 \
     run_type=test \

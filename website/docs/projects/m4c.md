@@ -4,7 +4,7 @@ sidebar_label: M4C
 title: Iterative Answer Prediction with Pointer-Augmented Multimodal Transformers for TextVQA
 ---
 
-This project page shows how to use M4C model from the following paper, released under the MMF:
+This project page shows how to use M4C model from the following paper, released under the multimodelity:
 
 - R. Hu, A. Singh, T. Darrell, M. Rohrbach, _Iterative Answer Prediction with Pointer-Augmented Multimodal Transformers for TextVQA_. in CVPR, 2020 ([PDF](https://arxiv.org/pdf/1911.06258.pdf))
 
@@ -21,7 +21,7 @@ Project Page: http://ronghanghu.com/m4c
 
 ## Installation
 
-Install MMF following the [installation guide](https://mmf.sh/docs/getting_started/installation/).
+Install multimodelity following the [installation guide](https://multimodelity.sh/docs/getting_started/installation/).
 
 This will install all M4C dependencies such as `transformers` and `editdistance` and will also compile the python interface for PHOC features.
 
@@ -35,7 +35,7 @@ The released imdbs contain OCR results and normalized bounding boxes (i.e. in th
 
 For the TextVQA dataset, the downloaded file contains both imdbs with the Rosetta-en OCRs (better performance) and imdbs with Rosetta-ml OCRs (same OCR results as in the previous [LoRRA](http://openaccess.thecvf.com/content_CVPR_2019/papers/Singh_Towards_VQA_Models_That_Can_Read_CVPR_2019_paper.pdf) model). Please download the corresponding OCR feature files.
 
-Note that the object Faster R-CNN features are extracted with [`extract_features_vmb.py`](https://github.com/facebookresearch/mmf/blob/master/tools/scripts/features/extract_features_vmb.py) and the OCR Faster R-CNN features are extracted with [`extract_ocr_frcn_feature.py`](https://github.com/facebookresearch/mmf/blob/master/projects/m4c/scripts/extract_ocr_frcn_feature.py).
+Note that the object Faster R-CNN features are extracted with [`extract_features_vmb.py`](https://github.com/facebookresearch/multimodelity/blob/master/tools/scripts/features/extract_features_vmb.py) and the OCR Faster R-CNN features are extracted with [`extract_ocr_frcn_feature.py`](https://github.com/facebookresearch/multimodelity/blob/master/projects/m4c/scripts/extract_ocr_frcn_feature.py).
 
 ## Pretrained M4C Models
 
@@ -53,14 +53,14 @@ For the TextVQA dataset, we release three versions: M4C trained with ST-VQA as a
 
 ## Training and Evaluation
 
-Please follow the [MMF documentation](https://mmf.sh/docs/getting_started/quickstart#training) for the training and evaluation of the M4C model on each dataset.
+Please follow the [multimodelity documentation](https://multimodelity.sh/docs/getting_started/quickstart#training) for the training and evaluation of the M4C model on each dataset.
 
 For example:
 
 1. to train the M4C model on the TextVQA training set:
 
 ```bash
-mmf_run dataset=textvqa \
+multimodelity_run dataset=textvqa \
   model=m4c \
   config=projects/m4c/configs/textvqa/defaults.yaml \
   env.save_dir=./save/m4c
@@ -71,7 +71,7 @@ mmf_run dataset=textvqa \
 2. To evaluate the pretrained M4C model locally on the a TextVQA's validation set (assuming that the pretrained model that you are evaluating is `m4c.textvqa.with_stvqa`):
 
 ```bash
-mmf_run dataset=textvqa \
+multimodelity_run dataset=textvqa \
   model=m4c \
   config=projects/m4c/configs/textvqa/defaults.yaml \
   env.save_dir=./save/m4c \
@@ -89,14 +89,14 @@ Use `checkpoint.resume=True` AND `checkpoint.resume_best=True` instead of `check
 
 :::tip
 
-Follow [checkpointing](https://mmf.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in MMF
+Follow [checkpointing](https://multimodelity.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in multimodelity
 
 :::
 
 3. to generate the EvalAI prediction files for the TextVQA test set (assuming you are evaluating the pretrained model `m4c.textvqa.with_stvqa`):
 
 ```bash
-mmf_predict dataset=textvqa \
+multimodelity_predict dataset=textvqa \
   model=m4c \
   config=projects/m4c/configs/textvqa/defaults.yaml \
   env.save_dir=./save/m4c \

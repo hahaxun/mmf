@@ -22,7 +22,7 @@ const features = [
     imageUrl: 'img/boilerplate.svg',
     description: (
       <>
-        MMF is designed from ground up to let you focus on what matters -- your
+        multimodelity is designed from ground up to let you focus on what matters -- your
         model -- by providing boilerplate code for distributed training, common
         datasets and state-of-the-art pretrained baselines out-of-the-box.
       </>
@@ -33,8 +33,8 @@ const features = [
     imageUrl: 'img/pytorch_logo.svg',
     description: (
       <>
-        MMF is built on top of PyTorch that brings all of its power in your
-        hands. MMF is not strongly opinionated. So you can use all of your
+        multimodelity is built on top of PyTorch that brings all of its power in your
+        hands. multimodelity is not strongly opinionated. So you can use all of your
         PyTorch knowledge here.
       </>
     ),
@@ -44,9 +44,9 @@ const features = [
     imageUrl: 'img/puzzle_pieces.svg',
     description: (
       <>
-        MMF is created to be easily extensible and composable. Through our
-        modular design, you can use specific components from MMF that you care
-        about. Our configuration system allows MMF to easily adapt to your
+        multimodelity is created to be easily extensible and composable. Through our
+        modular design, you can use specific components from multimodelity that you care
+        about. Our configuration system allows multimodelity to easily adapt to your
         needs.
       </>
     ),
@@ -61,7 +61,7 @@ function BannerImage() {
     <img
       className={classnames(styles.heroImg)}
       src={isDarkTheme ? logoWhite : logo}
-      alt="MMF Logo"
+      alt="multimodelity Logo"
     />
   );
 }
@@ -96,7 +96,7 @@ function Home() {
     <Layout
       title=""
       description={
-        'MMF is a modular framework powered by PyTorch for multimodal vision and ' +
+        'multimodelity is a modular framework powered by PyTorch for multimodal vision and ' +
         'language research from Facebook AI Research'
       }>
       <header className={classnames('hero hero--primary', styles.heroBanner)}>

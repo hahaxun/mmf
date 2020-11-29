@@ -7,7 +7,7 @@ jobs:
   unittest:
     # We want to run on external PRs, but not on our own internal PRs as they'll be run
     # by the push to the branch.
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'facebookresearch/mmf'
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'facebookresearch/multimodelity'
     strategy:
       fail-fast: false
       max-parallel: 12
@@ -24,7 +24,7 @@ jobs:
     - name: Setup Conda Environment
       uses: goanpeca/setup-miniconda@v1
       with:
-        activate-environment: mmf
+        activate-environment: multimodelity
         python-version: ${{ matrix.python-version }}
         auto-update-conda: true
         use-only-tar-bz2: true
@@ -40,13 +40,13 @@ jobs:
           /usr/share/miniconda/envs/
           /usr/local/miniconda/envs/
           C:\Miniconda\envs\
-        key: mmf-cpu-${{ matrix.platform }}-python${{ matrix.python-version }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/setup.py') }}
+        key: multimodelity-cpu-${{ matrix.platform }}-python${{ matrix.python-version }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/setup.py') }}
 
     - name: Install Windows Dependencies
       shell: bash -l {0}
       if: matrix.platform == 'windows-latest'
       run: |
-        conda activate mmf
+        conda activate multimodelity
         python -m pip install --upgrade pip
         pip install --upgrade setuptools certifi
         pip install --progress-bar off torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
@@ -57,7 +57,7 @@ jobs:
     - name: Install Dependencies
       shell: bash -l {0}
       run: |
-        conda activate mmf
+        conda activate multimodelity
         python -m pip install --upgrade pip
         pip install --upgrade setuptools
         pip install --progress-bar off pytest
@@ -68,14 +68,14 @@ jobs:
     - name: Install Repository
       shell: bash -l {0}
       run: |
-        conda activate mmf
+        conda activate multimodelity
         python setup.py clean --all
         python setup.py install
 
     - name: Run Unittests
       shell: bash -l {0}
       run: |
-        conda activate mmf
+        conda activate multimodelity
         cd tests
         pytest --junitxml=artifacts/junit-${{ matrix.platform }}-python${{ matrix.python-version }}.xml -v .
 

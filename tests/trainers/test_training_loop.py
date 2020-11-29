@@ -4,9 +4,9 @@ import unittest
 from unittest.mock import MagicMock
 
 import torch
-from mmf.common.sample import SampleList
-from mmf.trainers.core.profiling import TrainerProfilingMixin
-from mmf.trainers.core.training_loop import TrainerTrainingLoopMixin
+from multimodelity.common.sample import SampleList
+from multimodelity.trainers.core.profiling import TrainerProfilingMixin
+from multimodelity.trainers.core.training_loop import TrainerTrainingLoopMixin
 from omegaconf import OmegaConf
 from tests.test_utils import NumbersDataset, SimpleModel
 

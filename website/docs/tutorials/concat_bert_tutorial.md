@@ -4,40 +4,40 @@ title: 'Tutorial: Adding a model - Concat BERT'
 sidebar_label: Adding a model - Concat BERT
 ---
 
-In this tutorial, we will go through the step-by-step process of creating a new model using MMF. In this case, we will create a fusion model and train it on the [Hateful Memes dataset](https://github.com/facebookresearch/mmf/tree/master/projects/hateful_memes).
+In this tutorial, we will go through the step-by-step process of creating a new model using multimodelity. In this case, we will create a fusion model and train it on the [Hateful Memes dataset](https://github.com/facebookresearch/multimodelity/tree/master/projects/hateful_memes).
 
-The fusion model that we will create concatenates embeddings from a text encoder and an image encoder and passes them through a two-layer classifier. MMF provides standard image and text encoders out of the box. For the image encoder, we will use ResNet152 image encoder and for the text encoder, we will use BERT-Base Encoder.
+The fusion model that we will create concatenates embeddings from a text encoder and an image encoder and passes them through a two-layer classifier. multimodelity provides standard image and text encoders out of the box. For the image encoder, we will use ResNet152 image encoder and for the text encoder, we will use BERT-Base Encoder.
 
 ## Prerequisites
 
-Follow the prerequisites for installation and dataset [here](https://github.com/facebookresearch/mmf/tree/master/projects/hateful_memes#prerequisites).
+Follow the prerequisites for installation and dataset [here](https://github.com/facebookresearch/multimodelity/tree/master/projects/hateful_memes#prerequisites).
 
-## Using MMF to build the model
+## Using multimodelity to build the model
 
-We will start building our model `ConcatBERTTutorial` using the various building blocks available in MMF. Helper builder methods like `build_image_encoder` for building image encoders, `build_text_encoder` for building text encoders, `build_classifier_layer` for classifier layers etc take configurable params which are defined in the config we will create in the next section. Follow the code and read through the comments to understand how the model is implemented.
+We will start building our model `ConcatBERTTutorial` using the various building blocks available in multimodelity. Helper builder methods like `build_image_encoder` for building image encoders, `build_text_encoder` for building text encoders, `build_classifier_layer` for classifier layers etc take configurable params which are defined in the config we will create in the next section. Follow the code and read through the comments to understand how the model is implemented.
 
 ```python
 
 import torch
 
-# registry is need to register our new model so as to be MMF discoverable
-from mmf.common.registry import registry
+# registry is need to register our new model so as to be multimodelity discoverable
+from multimodelity.common.registry import registry
 
-# All model using MMF need to inherit BaseModel
-from mmf.models.base_model import BaseModel
+# All model using multimodelity need to inherit BaseModel
+from multimodelity.models.base_model import BaseModel
 
 # Builder methods for image encoder and classifier
-from mmf.utils.build import (
+from multimodelity.utils.build import (
     build_classifier_layer,
     build_image_encoder,
     build_text_encoder,
 )
 
 
-# Register the model for MMF, "concat_bert_tutorial" key would be used to find the model
+# Register the model for multimodelity, "concat_bert_tutorial" key would be used to find the model
 @registry.register_model("concat_bert_tutorial")
 class ConcatBERTTutorial(BaseModel):
-    # All models in MMF get first argument as config which contains all
+    # All models in multimodelity get first argument as config which contains all
     # of the information you stored in this model's config (hyperparameters)
     def __init__(self, config):
         # This is not needed in most cases as it just calling parent's init
@@ -46,7 +46,7 @@ class ConcatBERTTutorial(BaseModel):
         super().__init__(config)
         self.build()
 
-    # This classmethod tells MMF where to look for default config of this model
+    # This classmethod tells multimodelity where to look for default config of this model
     @classmethod
     def config_path(cls):
         # Relative to user dir root
@@ -56,7 +56,7 @@ class ConcatBERTTutorial(BaseModel):
     # are actually build and assigned to the model
     def build(self):
         """
-        Config's image_encoder attribute will be used to build an MMF image
+        Config's image_encoder attribute will be used to build an multimodelity image
         encoder. This config in yaml will look like:
 
         # "type" parameter specifies the type of encoder we are using here.
@@ -107,7 +107,7 @@ class ConcatBERTTutorial(BaseModel):
         """
         self.classifier = build_classifier_layer(self.config.classifier)
 
-    # Each model in MMF gets a dict called sample_list which contains
+    # Each model in multimodelity gets a dict called sample_list which contains
     # all of the necessary information returned from the image
     def forward(self, sample_list):
         # Text input features will be in "input_ids" key
@@ -129,12 +129,12 @@ class ConcatBERTTutorial(BaseModel):
         # Pass final tensor to classifier to get scores
         logits = self.classifier(combined)
 
-        # For loss calculations (automatically done by MMF
+        # For loss calculations (automatically done by multimodelity
         # as per the loss defined in the config),
         # we need to return a dict with "scores" key as logits
         output = {"scores": logits}
 
-        # MMF will automatically calculate loss
+        # multimodelity will automatically calculate loss
         return output
 
 ```
@@ -192,7 +192,7 @@ model_config:
 
 ## Experiment Config
 
-In the next step, we will create the experiment config which will tell MMF which dataset, optimizer, scheduler, metrics for evalauation to use. We will save this config in `configs/experiments/concat_bert_tutorial/defaults.yaml`:
+In the next step, we will create the experiment config which will tell multimodelity which dataset, optimizer, scheduler, metrics for evalauation to use. We will save this config in `configs/experiments/concat_bert_tutorial/defaults.yaml`:
 
 ```yaml
 includes:
@@ -234,17 +234,17 @@ training:
     minimize: false
 ```
 
-We include the `bert.yaml` config in this as we want to use BERT tokenizer for preprocessing our language data. With both the configs ready we are ready to launch training and evaluation using our model on the Hateful Memes dataset. You can read more about the MMF’s configuration system [here](https://mmf.sh/docs/notes/configuration).
+We include the `bert.yaml` config in this as we want to use BERT tokenizer for preprocessing our language data. With both the configs ready we are ready to launch training and evaluation using our model on the Hateful Memes dataset. You can read more about the multimodelity’s configuration system [here](https://multimodelity.sh/docs/notes/configuration).
 
 ## Training and Evaluation
 
 Now we are ready to train and evaluate our model with the experiment config we created in previous step.
 
 ```bash
-mmf_run config="configs/experiments/concat_bert_tutorial/defaults.yaml" \
+multimodelity_run config="configs/experiments/concat_bert_tutorial/defaults.yaml" \
     model=concat_bert_tutorial \
     dataset=hateful_memes \
     run_type=train_val
 ```
 
-When training ends it will save a final model `concat_bert_tutorial_final.pth` in the experiment folder under `./save` directory. More details about checkpoints can be found [here](https://mmf.sh/docs/tutorials/checkpointing). The command will also generate validation scores after the training gets over.
+When training ends it will save a final model `concat_bert_tutorial_final.pth` in the experiment folder under `./save` directory. More details about checkpoints can be found [here](https://multimodelity.sh/docs/tutorials/checkpointing). The command will also generate validation scores after the training gets over.

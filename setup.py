@@ -85,9 +85,9 @@ def fetch_files_from_folder(folder):
 
 def fetch_package_data():
     current_dir = os.getcwd()
-    mmf_folder = os.path.dirname(os.path.abspath(__file__))
-    # The files for package data need to be relative to mmf package dir
-    os.chdir(os.path.join(mmf_folder, "mmf"))
+    multimodelity_folder = os.path.dirname(os.path.abspath(__file__))
+    # The files for package data need to be relative to multimodelity package dir
+    os.chdir(os.path.join(multimodelity_folder, "multimodelity"))
     data_files = fetch_files_from_folder("projects")
     data_files += fetch_files_from_folder("tools")
     data_files += fetch_files_from_folder("configs")
@@ -96,13 +96,13 @@ def fetch_package_data():
     return data_files
 
 
-DISTNAME = "mmf"
-DESCRIPTION = "mmf: a modular framework for vision and language multimodal \
+DISTNAME = "multimodelity"
+DESCRIPTION = "multimodelity: a modular framework for vision and language multimodal \
 research."
 LONG_DESCRIPTION = fetch_long_description()
 LONG_DESCRIPTION_CONTENT_TYPE = "text/markdown"
 AUTHOR = "Facebook AI Research"
-AUTHOR_EMAIL = "mmf@fb.com"
+AUTHOR_EMAIL = "multimodelity@fb.com"
 DEPENDENCY_LINKS = []
 REQUIREMENTS = (fetch_requirements(),)
 # Need to exclude folders in tests as well so as they don't create an extra package
@@ -111,7 +111,7 @@ EXCLUDES = ("data", "docs", "tests", "tests.*", "tools", "tools.*")
 CMD_CLASS = {"build_ext": build_ext}
 EXT_MODULES = [
     Extension(
-        "mmf.utils.phoc.cphoc", sources=["mmf/utils/phoc/src/cphoc.c"], language="c"
+        "multimodelity.utils.phoc.cphoc", sources=["multimodelity/utils/phoc/src/cphoc.c"], language="c"
     )
 ]
 
@@ -131,12 +131,12 @@ if __name__ == "__main__":
         name=DISTNAME,
         install_requires=REQUIREMENTS,
         include_package_data=True,
-        package_data={"mmf": fetch_package_data()},
+        package_data={"multimodelity": fetch_package_data()},
         packages=setuptools.find_packages(exclude=EXCLUDES),
         python_requires=">=3.6",
         ext_modules=EXT_MODULES,
         cmdclass=CMD_CLASS,
-        version=find_version("mmf", "version.py"),
+        version=find_version("multimodelity", "version.py"),
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         long_description_content_type=LONG_DESCRIPTION_CONTENT_TYPE,
@@ -153,9 +153,9 @@ if __name__ == "__main__":
         ],
         entry_points={
             "console_scripts": [
-                "mmf_run = mmf_cli.run:run",
-                "mmf_predict = mmf_cli.predict:predict",
-                "mmf_convert_hm = mmf_cli.hm_convert:main",
+                "multimodelity_run = multimodelity_cli.run:run",
+                "multimodelity_predict = multimodelity_cli.predict:predict",
+                "multimodelity_convert_hm = multimodelity_cli.hm_convert:main",
             ]
         },
     )

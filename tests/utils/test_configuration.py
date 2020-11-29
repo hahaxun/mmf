@@ -2,9 +2,9 @@
 import os
 import unittest
 
-from mmf.utils.configuration import Configuration, get_zoo_config
-from mmf.utils.env import setup_imports
-from mmf.utils.general import get_mmf_root
+from multimodelity.utils.configuration import Configuration, get_zoo_config
+from multimodelity.utils.env import setup_imports
+from multimodelity.utils.general import get_multimodelity_root
 from tests.test_utils import dummy_args
 
 
@@ -53,7 +53,7 @@ class TestUtilsConfiguration(unittest.TestCase):
 
     def test_config_overrides(self):
         config_path = os.path.join(
-            get_mmf_root(),
+            get_multimodelity_root(),
             "..",
             "projects",
             "m4c",

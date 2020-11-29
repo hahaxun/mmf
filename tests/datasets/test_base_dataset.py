@@ -2,9 +2,9 @@
 import os
 import unittest
 
-from mmf.common.registry import registry
-from mmf.datasets.base_dataset import BaseDataset
-from mmf.utils.configuration import Configuration
+from multimodelity.common.registry import registry
+from multimodelity.datasets.base_dataset import BaseDataset
+from multimodelity.utils.configuration import Configuration
 
 from ..test_utils import dummy_args
 
@@ -13,7 +13,7 @@ class TestBaseDataset(unittest.TestCase):
     def test_init_processors(self):
         path = os.path.join(
             os.path.abspath(__file__),
-            "../../../mmf/configs/datasets/vqa2/defaults.yaml",
+            "../../../multimodelity/configs/datasets/vqa2/defaults.yaml",
         )
         args = dummy_args()
         args.opts.append(f"config={path}")

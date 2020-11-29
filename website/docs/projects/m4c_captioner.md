@@ -4,7 +4,7 @@ sidebar_label: M4C-Captioner
 title: 'TextCaps: a Dataset for Image Captioning with Reading Comprehension'
 ---
 
-This project page shows how to use M4C-Captioner model from the following paper, released under the MMF:
+This project page shows how to use M4C-Captioner model from the following paper, released under the multimodelity:
 
 - O. Sidorov, R. Hu, M. Rohrbach, A. Singh, _TextCaps: a Dataset for Image Captioning with Reading Comprehension_. in ECCV, 2020 ([PDF](https://arxiv.org/pdf/2003.12462.pdf))
 
@@ -21,7 +21,7 @@ Project Page: https://textvqa.org/textcaps
 
 ## Installation
 
-Install MMF following the [installation guide](https://mmf.sh/docs/getting_started/installation/).
+Install multimodelity following the [installation guide](https://multimodelity.sh/docs/getting_started/installation/).
 
 This will install all M4C dependencies such as `transformers` and `editdistance` and will also compile the python interface for PHOC features.
 
@@ -45,13 +45,13 @@ We release two variants of the M4C-Captioner model trained on the TextCaps datas
 
 ## Training and Evaluating M4C-Captioner
 
-Please follow the [MMF documentation](https://learnpythia.readthedocs.io/en/latest/tutorials/quickstart.html#training) for the training and evaluation of the M4C-Captioner models.
+Please follow the [multimodelity documentation](https://learnpythia.readthedocs.io/en/latest/tutorials/quickstart.html#training) for the training and evaluation of the M4C-Captioner models.
 
 For example:
 
 1) to train the M4C-Captioner model on the TextCaps training set:
 ```bash
-mmf_run datasets=textcaps \
+multimodelity_run datasets=textcaps \
     model=m4c_captioner \
     config=projects/m4c_captioner/configs/m4c_captioner/textcaps/defaults.yaml \
     env.save_dir=./save/m4c_captioner/defaults \
@@ -64,7 +64,7 @@ mmf_run datasets=textcaps \
 
 Generate prediction file on the validation set:
 ```bash
-mmf_predict datasets=textcaps \
+multimodelity_predict datasets=textcaps \
     model=m4c_captioner \
     config=projects/m4c_captioner/configs/m4c_captioner/textcaps/defaults.yaml \
     env.save_dir=./save/m4c_captioner/defaults \
@@ -74,7 +74,7 @@ mmf_predict datasets=textcaps \
 
 Generate prediction file on the test set:
 ```bash
-mmf_predict datasets=textcaps \
+multimodelity_predict datasets=textcaps \
     model=m4c_captioner \
     config=projects/m4c_captioner/configs/m4c_captioner/textcaps/defaults.yaml \
     env.save_dir=./save/m4c_captioner/defaults \
@@ -92,19 +92,19 @@ Use `checkpoint.resume=True` AND `checkpoint.resume_best=True` instead of `check
 
 :::tip
 
-Follow [checkpointing](https://mmf.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in MMF
+Follow [checkpointing](https://multimodelity.sh/docs/tutorials/checkpointing) tutorial to understand more fine-grained details of checkpoint, loading and resuming in multimodelity
 
 :::
 
 Afterwards, use `projects/m4c_captioner/scripts/textcaps_eval.py` to evaluate the prediction json file. For example:
 ```bash
-# the default data location of MMF (unless you have specified it otherwise)
-# this is where MMF datasets are stored
-export MMF_DATA_DIR=~/.cache/torch/mmf/data
+# the default data location of multimodelity (unless you have specified it otherwise)
+# this is where multimodelity datasets are stored
+export multimodelity_DATA_DIR=~/.cache/torch/multimodelity/data
 
 python projects/m4c_captioner/scripts/textcaps_eval.py \
     --set val \
-    --annotation_file ${MMF_DATA_DIR}/datasets/textcaps/defaults/annotations/imdb_val.npy \
+    --annotation_file ${multimodelity_DATA_DIR}/datasets/textcaps/defaults/annotations/imdb_val.npy \
     --pred_file YOUR_VAL_PREDICTION_FILE
 ```
 For test set evaluation, please submit to the TextCaps EvalAI server. See https://textvqa.org/textcaps for details.

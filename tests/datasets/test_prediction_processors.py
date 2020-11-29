@@ -3,9 +3,9 @@
 import unittest
 
 import torch
-from mmf.common.report import Report
-from mmf.common.sample import SampleList
-from mmf.datasets.processors.prediction_processors import ArgMaxPredictionProcessor
+from multimodelity.common.report import Report
+from multimodelity.common.sample import SampleList
+from multimodelity.datasets.processors.prediction_processors import ArgMaxPredictionProcessor
 
 
 class TestDatasetProcessors(unittest.TestCase):

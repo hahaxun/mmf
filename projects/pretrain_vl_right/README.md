@@ -14,7 +14,7 @@ This repository contains the code for modified implementation of VisualBERT and 
 
 ## Installation
 
-Follow installation instructions in the [documentation](https://mmf.readthedocs.io/en/latest/notes/installation.html).
+Follow installation instructions in the [documentation](https://multimodelity.readthedocs.io/en/latest/notes/installation.html).
 
 ## Getting Data
 
@@ -26,14 +26,14 @@ Data should automatically download for the datasets involved in this project. Do
 
 Example : To pretrain VisualBERT model on the COCO Captions dataset, run the following command
 ```
-mmf_run config=projects/pretrain_vl_right/configs/visual_bert/masked_coco/full.yaml run_type=train_val dataset=masked_coco model=visual_bert
+multimodelity_run config=projects/pretrain_vl_right/configs/visual_bert/masked_coco/full.yaml run_type=train_val dataset=masked_coco model=visual_bert
 ```
 
 ### Finetuning
 
 Example : To finetune VisualBERT model on the VQA2.0 dataset, run the following command
 ```
-mmf_run config=projects/visual_bert/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=visual_bert checkpoint.resume_file=<path_to_pretrained_visual_bert_model> checkpoint.resume_pretrained=true
+multimodelity_run config=projects/visual_bert/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=visual_bert checkpoint.resume_file=<path_to_pretrained_visual_bert_model> checkpoint.resume_pretrained=true
 ```
 
 Configs for different settings and pretraining models are provided in the next section.

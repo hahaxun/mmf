@@ -1,6 +1,6 @@
 # MoViE-MCAN (VQA 2020 Challenge Winner)
 
-This repository contains the code for pytorch implementation of MoViE+MCAN model, winner of the VQA Challenge 2020 at CVPR. Please cite the following papers if you are using MoViE+MCAN model from mmf:
+This repository contains the code for pytorch implementation of MoViE+MCAN model, winner of the VQA Challenge 2020 at CVPR. Please cite the following papers if you are using MoViE+MCAN model from multimodelity:
 
 * Nguyen, D. K., Goswami, V., & Chen, X. (2020). *Revisiting Modulated Convolutions for Visual Counting and Beyond*. arXiv preprint arXiv:2004.11883. ([arXiV](https://arxiv.org/abs/2004.11883))
 ```
@@ -24,4 +24,4 @@ and
 }
 ```
 
-Please see [https://mmf.sh/docs/projects/movie_mcan](https://mmf.sh/docs/projects/movie_mcan) for more details on how to use MoViE+MCAN model.
+Please see [https://multimodelity.sh/docs/projects/movie_mcan](https://multimodelity.sh/docs/projects/movie_mcan) for more details on how to use MoViE+MCAN model.

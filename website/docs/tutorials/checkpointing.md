@@ -8,14 +8,14 @@ In this tutorial, we will learn about the different details around finetuning fr
 
 ## Pre-requisites and installation
 
-Follow the prerequisites for installation and dataset [here](https://github.com/facebookresearch/mmf/tree/master/projects/hateful_memes#prerequisites).
+Follow the prerequisites for installation and dataset [here](https://github.com/facebookresearch/multimodelity/tree/master/projects/hateful_memes#prerequisites).
 
 ## Finetuning from a pretrained model
 
 VisualBERT model is pretrained on V+L multimodal data. We will use a pretrained model on COCO Captions. To begin finetuning our VisualBERT model we will load a model pretrained on COCO Captions and finetune that on Hateful Memes.
 
 ```bash
-mmf_run config=projects/visual_bert/configs/hateful_memes/from_coco.yaml \
+multimodelity_run config=projects/visual_bert/configs/hateful_memes/from_coco.yaml \
     model=visual_bert \
     dataset=hateful_memes \
     run_type=train_val
@@ -41,10 +41,10 @@ checkpoint:
 
 This will ensure only the `model.bert` layers of the COCO pretrained model gets loaded.
 
-We can also use the default config for VisualBERT on hateful memes directly and override the pretrained options through [command line args](https://mmf.sh/docs/notes/configuration#command-line-dot-list-override):
+We can also use the default config for VisualBERT on hateful memes directly and override the pretrained options through [command line args](https://multimodelity.sh/docs/notes/configuration#command-line-dot-list-override):
 
 ```
-mmf_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml model=visual_bert dataset=hateful_memes \
+multimodelity_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml model=visual_bert dataset=hateful_memes \
 run_type=train_val checkpoint.resume_pretrained=True checkpoint.resume_zoo=visual_bert.pretrained.coco
 ```
 
@@ -65,7 +65,7 @@ After running the training our model will be saved in `./save/<experiment_name>/
 Instead of loading from the model zoo we can also load from a file:
 
 ```bash
-mmf_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
+multimodelity_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
     model=visual_bert \
     dataset=hateful_memes \
     run_type=train_val \
@@ -80,19 +80,19 @@ mmf_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
 To resume the training in case it gets intterupted, run:
 
 ```bash
-mmf_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
+multimodelity_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
     model=visual_bert \
     dataset=hateful_memes \
     run_type=train_val \
     checkpoint.resume=True
 ```
 
-When `checkpoint.resume=True`, MMF will try to load automatically the last saved checkpoint in the `env.save_dir` experiment folder `current.ckpt`.
+When `checkpoint.resume=True`, multimodelity will try to load automatically the last saved checkpoint in the `env.save_dir` experiment folder `current.ckpt`.
 
 Instead of the last saved checkpoint, we can also resume from the "best" checkpoint based on `training.early_stop.criteria` if enabled in the config. This can be achieved using `checkpoint.resume_best=True`:
 
 ```bash
-mmf_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
+multimodelity_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
     model=visual_bert \
     dataset=hateful_memes \
     run_type=train_val \
@@ -125,7 +125,7 @@ When the parameter is set to -1, every eligible checkpoint is saved; otherwise, 
 After we finish the training we will load the trained model for validation:
 
 ```bash
-mmf_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
+multimodelity_run config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
     model=visual_bert \
     dataset=hateful_memes \
     run_type=val \
@@ -139,7 +139,7 @@ Note that here we specify `run_type=val` so that we are running only validation.
 We will next load the trained model to generate prediction results:
 
 ```bash
-mmf_predict config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
+multimodelity_predict config=projects/visual_bert/configs/hateful_memes/defaults.yaml \
     model=visual_bert \
     dataset=hateful_memes \
     run_type=test \

@@ -1,6 +1,6 @@
 ---
 name: "Unexpected behaviors"
-about: Run into unexpected behaviors when using MMF
+about: Run into unexpected behaviors when using multimodelity
 title: Please read & provide the following information
 
 ---
@@ -36,4 +36,4 @@ python -m torch.utils.collect_env
 
 If your issue looks like an installation issue / environment issue,
 please first try to solve it with the instructions in
-https://mmf.sh/docs/getting_started/installation
+https://multimodelity.sh/docs/getting_started/installation

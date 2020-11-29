@@ -1,5 +1,5 @@
 includes:
-- ../../../mmf/configs/textvqa/defaults.yaml
+- ../../../multimodelity/configs/textvqa/defaults.yaml
 
 evaluation:
   metrics:

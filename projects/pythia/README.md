@@ -29,10 +29,10 @@ and the original paper for old Pythia model:
 
 ## Installation
 
-Follow installation instructions in the [documentation](https://mmf.readthedocs.io/en/latest/notes/installation.html).
+Follow installation instructions in the [documentation](https://multimodelity.readthedocs.io/en/latest/notes/installation.html).
 
 ## Training
 To train Pythia model on the VQA2.0 dataset, run the following command
 ```
-mmf_run config=projects/mmf/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=pythia
+multimodelity_run config=projects/multimodelity/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=pythia
 ```

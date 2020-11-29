@@ -20,7 +20,7 @@ install_dep: &install_dep
   - run:
       name: Install Dependencies
       command: |
-        source activate mmf
+        source activate multimodelity
         pip install --upgrade setuptools
         pip install --progress-bar off flake8==3.7.9
         pip install --progress-bar off black==19.3b0
@@ -36,14 +36,14 @@ install_repo: &install_repo
   - run:
       name: Install Repository
       command: |
-        source activate mmf
+        source activate multimodelity
         python setup.py build develop
 
 run_unittests: &run_unittests
   - run:
       name: Run Unit Tests
       command: |
-        source activate mmf
+        source activate multimodelity
         cd tests
         pytest --junitxml=test-results/junit.xml -v .
 
@@ -68,11 +68,11 @@ create_conda_env: &create_conda_env
         rm ~/miniconda.sh
         echo 'export PATH=$HOME/miniconda/bin:$PATH' >> $BASH_ENV
         source $BASH_ENV
-        if [ ! -d ~/miniconda/envs/mmf ]
+        if [ ! -d ~/miniconda/envs/multimodelity ]
         then
-          conda create -y -n mmf python=3.7
+          conda create -y -n multimodelity python=3.7
         fi
-        source activate mmf
+        source activate multimodelity
         python --version
         which python
         which pip
@@ -88,7 +88,7 @@ jobs:
   gpu_tests:
     <<: *gpu
 
-    working_directory: ~/mmf
+    working_directory: ~/multimodelity
 
     steps:
       - checkout

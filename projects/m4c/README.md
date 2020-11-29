@@ -1,6 +1,6 @@
 # Iterative Answer Prediction with Pointer-Augmented Multimodal Transformers for TextVQA
 
-This repository contains the code for M4C model from the following paper, released under the MMF:
+This repository contains the code for M4C model from the following paper, released under the multimodelity:
 
 * R. Hu, A. Singh, T. Darrell, M. Rohrbach, *Iterative Answer Prediction with Pointer-Augmented Multimodal Transformers for TextVQA*. in CVPR, 2020 ([PDF](https://arxiv.org/pdf/1911.06258.pdf))
 ```
@@ -12,4 +12,4 @@ This repository contains the code for M4C model from the following paper, releas
 }
 ```
 
-Please see [https://mmf.sh/docs/projects/m4c](https://mmf.sh/docs/projects/m4c) for more details on how to use m4c model.
+Please see [https://multimodelity.sh/docs/projects/m4c](https://multimodelity.sh/docs/projects/m4c) for more details on how to use m4c model.

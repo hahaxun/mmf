@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = mmf
+SPHINXPROJ    = multimodelity
 SOURCEDIR     = source
 BUILDDIR      = build
 

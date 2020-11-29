@@ -4,7 +4,7 @@ title: Large Scale Hyperparameter Sweeps on Slurm
 sidebar_label: Sweeping on Slurm
 ---
 
-MMF provides a utility script for running large scale hyperparameter sweeps on SLURM based cluster setups. A grid search is run on all permutations for the values provided for each of the hyperparameters in the script. The dotlist overrides provided via MMF's configuration system allows to easily override any configuration parameter through this script. This script is created based on sweep scripts provided in FAIRSeq authored by [@myleott](https://github.com/myleott).
+multimodelity provides a utility script for running large scale hyperparameter sweeps on SLURM based cluster setups. A grid search is run on all permutations for the values provided for each of the hyperparameters in the script. The dotlist overrides provided via multimodelity's configuration system allows to easily override any configuration parameter through this script. This script is created based on sweep scripts provided in FAIRSeq authored by [@myleott](https://github.com/myleott).
 
 An example script to sweep over learning rate and batch size for MMBT on hateful memes would look like (assuming it is living at `tools/sweeps/sweep_mmbt_hm.py`):
 
@@ -82,7 +82,7 @@ Add `--dry_run` argument to first print out what exactly is going to be run with
 
 :::
 
-An actual complex sweep config for visual bert with more options can be found at [./tools/sweep/sweep_visual_bert.py](https://github.com/facebookresearch/mmf/blob/master/tools/sweeps/sweep_visual_bert.py). Command following the above command to run it:
+An actual complex sweep config for visual bert with more options can be found at [./tools/sweep/sweep_visual_bert.py](https://github.com/facebookresearch/multimodelity/blob/master/tools/sweeps/sweep_visual_bert.py). Command following the above command to run it:
 
 ```sh
 python tools/sweeps/sweep_visual_bert.py \

@@ -3,7 +3,7 @@
 import unittest
 
 import torch
-from mmf.trainers.mmf_trainer import MMFTrainer
+from multimodelity.trainers.multimodelity_trainer import multimodelityTrainer
 from tests.test_utils import SimpleModel, skip_if_no_cuda
 from tests.trainers.test_training_loop import TrainerTrainingLoopMock
 
@@ -26,7 +26,7 @@ class SimpleModelWithFp16Assert(SimpleModel):
         return model_output
 
 
-class MMFTrainerMock(TrainerTrainingLoopMock, MMFTrainer):
+class multimodelityTrainerMock(TrainerTrainingLoopMock, multimodelityTrainer):
     def __init__(
         self, num_train_data, max_updates, max_epochs, device="cuda", fp16_model=False
     ):
@@ -35,7 +35,7 @@ class MMFTrainerMock(TrainerTrainingLoopMock, MMFTrainer):
         if fp16_model:
             assert (
                 torch.cuda.is_available()
-            ), "MMFTrainerMock fp16 requires cuda enabled"
+            ), "multimodelityTrainerMock fp16 requires cuda enabled"
             self.model = SimpleModelWithFp16Assert(1)
             self.model = self.model.cuda()
         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=1e-3)
@@ -44,7 +44,7 @@ class MMFTrainerMock(TrainerTrainingLoopMock, MMFTrainer):
 class TestFp16(unittest.TestCase):
     @skip_if_no_cuda
     def test_fp16_works(self):
-        trainer = MMFTrainerMock(100, 2, 0.04)
+        trainer = multimodelityTrainerMock(100, 2, 0.04)
         trainer.load_fp16_scaler()
         self.assertTrue(isinstance(trainer.scaler, torch.cuda.amp.GradScaler))
         self.assertEqual(trainer.current_iteration, 0)
@@ -53,6 +53,6 @@ class TestFp16(unittest.TestCase):
 
     @skip_if_no_cuda
     def test_fp16_values(self):
-        trainer = MMFTrainerMock(100, 2, 0.04, fp16_model=True)
+        trainer = multimodelityTrainerMock(100, 2, 0.04, fp16_model=True)
         trainer.load_fp16_scaler()
         trainer.training_loop()
