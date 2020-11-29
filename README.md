@@ -1,51 +1,79 @@
+# Tag Framework System
 
-<div align="center">
-<img src="https://multimodelity.sh/img/logo.svg" width="50%"/>
-</div>
+Supported Features:
 
-#
+* General instance and video classification, detection, tracking, and search
+* Supervised and self-supervised support
+* Distributed traing
+* Face detection: retina face
 
-<div align="center">
-  <a href="https://multimodelity.sh/docs">
-  <img alt="Documentation Status" src="https://readthedocs.org/projects/multimodelity/badge/?version=latest"/>
-  </a>
-  <a href="https://circleci.com/gh/facebookresearch/multimodelity">
-  <img alt="CircleCI" src="https://circleci.com/gh/facebookresearch/multimodelity.svg?style=svg"/>
-  </a>
-</div>
+This is an initial design for a tag system, including training and inference.
 
----
+1. Dataset: Providing dataloader for both image and video
+2. Backbone: Providing various pretrained model selection for both image and
+video support
+3. Tasks: Providing various task trainers and inferences, including detection,
+classification and search
+4. Loss: Providing loss function selection and parameter adjuster, supporting
+both image and video
+5. Optimizer: Providing optimizer function selection and parameter adjuster,
+supporting both image and video
+6. Metrics: Providing evaluation functions for different tasks and models
+7. Distributions: Providing CPU and GPU support versions, also extending to
+Persia in the future
 
-multimodelity is a modular framework for vision and language multimodal research from Facebook AI Research. multimodelity contains reference implementations of state-of-the-art vision and language models and has powered multiple research projects at Facebook AI Research. See full list of project inside or built on multimodelity [here](https://multimodelity.sh/docs/notes/projects).
+## Install
 
-multimodelity is powered by PyTorch, allows distributed training and is un-opinionated, scalable and fast. Use multimodelity to **_bootstrap_** for your next vision and language multimodal research project by following the [installation instructions](https://multimodelity.sh/docs/getting_started/installation). Take a look at list of multimodelity features [here](https://multimodelity.sh/docs/getting_started/features).
+    python setup.py build
+    python setup.py install
+Or
 
-multimodelity also acts as **starter codebase** for challenges around vision and
-language datasets (The Hateful Memes, TextVQA, TextCaps and VQA challenges). multimodelity was formerly known as Pythia. The next video shows an overview of how datasets and models work inside multimodelity. Checkout multimodelity's [video overview](https://multimodelity.sh/docs/getting_started/video_overview).
+    pip install .
+## Usage
 
+    export PYTHONPATH=YOURPATH/tag-framework-system/:$PYTHONPATH
 
-## Installation
+### Distributed traing
 
-Follow installation instructions in the [documentation](https://multimodelity.sh/docs/getting_started/installation).
+### Video classification
+#### S3D Network
+Pretrained model
+<a href="https://docs.corp.kuaishou.com/f/fcAD4isBuFBpJo5qmZCQRE040">Download Link</a>
 
-## Documentation
+#### P3D Network
+Pretrained model
+1. P3D-199 trained on Kinetics dataset:
+<a href="https://docs.corp.kuaishou.com/file/fcACo6bOPgCxHGy9S6OSGIU34">Download Link</a>
 
-Learn more about multimodelity [here](https://multimodelity.sh/docs).
+2. P3D-199 trianed on Kinetics Optical Flow (TVL1):
+<a href="https://docs.corp.kuaishou.com/file/fcACID9hgz3ym7sMB_Khyo1MM">Download Link</a>
 
-## Citation
+3. P3D-199 trained on Kinetics600, RGB, 224&299:
+Change the value of GAP kernel from 5 to 7 if 224, to 9 if 299
+<a href="https://docs.corp.kuaishou.com/file/fcAB1W87jkrjOYGt5wLFF1vlJ">Download Link</a>
 
-If you use multimodelity in your work or use any models published in multimodelity, please cite:
+#### ebiz_item_classify Network
+1. Pretrained model: Network trained on the set of kuaishou commodity with visual and language infomation
+<a href="https://docs.corp.kuaishou.com/file/fcADbWgkfVb2b9eBvWUdm5jkb">Download Link</a>
 
-```bibtex
-@misc{singh2020multimodelity,
-  author =       {Singh, Amanpreet and Goswami, Vedanuj and Natarajan, Vivek and Jiang, Yu and Chen, Xinlei and Shah, Meet and
-                 Rohrbach, Marcus and Batra, Dhruv and Parikh, Devi},
-  title =        {multimodelity: A multimodal framework for vision and language research},
-  howpublished = {\url{https://github.com/facebookresearch/multimodelity}},
-  year =         {2020}
-}
-```
+2. Use the following command to fine tune the model with the latest ebiz data:
 
-## License
+    cd tag_framework/networks/ebiz_item_classify/
+    
+    sh at012_auto_train.sh
+    
+#### C3D Network
+Currently, we do not have pretrained C3D network.
 
-multimodelity is licensed under BSD license available in [LICENSE](LICENSE) file
+### Video representation learning
+
+### Video Detection
+
+### Video Tracking
+
+### Video Search
+
+### Face Detection
+You can use retina face now, just look at example/retinaface/test_face.py 
+
+Copyright (c) 2020, Kuaishou. All rights reserved.
