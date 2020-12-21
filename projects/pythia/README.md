@@ -34,5 +34,5 @@ Follow installation instructions in the [documentation](https://multimodelity.re
 ## Training
 To train Pythia model on the VQA2.0 dataset, run the following command
 ```
+
 multimodelity_run config=projects/multimodelity/configs/vqa2/defaults.yaml run_type=train_val dataset=vqa2 model=pythia
-```

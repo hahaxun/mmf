@@ -52,6 +52,7 @@ from multimodelity.common.sample import to_device
 from multimodelity.modules.losses import Losses
 from multimodelity.utils.checkpoint import load_pretrained_model
 from multimodelity.utils.download import download_pretrained_model
+from multimodelity.utils.file_io import PathManager
 from omegaconf import MISSING, DictConfig, OmegaConf
 from torch import nn
 
@@ -60,7 +61,7 @@ logger = logging.getLogger(__name__)
 
 
 class BaseModel(nn.Module):
-    """For integration with Pythia's trainer, datasets and other features,
+    """For integration with MMF's trainer, datasets and other features,
     models needs to inherit this class, call `super`, write a build function,
     write a forward function taking a ``SampleList`` as input and returning a
     dict as output and finally, register it using ``@registry.register_model``
@@ -124,8 +125,8 @@ class BaseModel(nn.Module):
 
     @classmethod
     def format_state_key(cls, key):
-        """Can be implemented if something special needs to be done
-        key when pretrained model is being load. This will adapt and return
+        """Can be implemented if something special needs to be done to the
+        key when pretrained model is being loaded. This will adapt and return
         keys according to that. Useful for backwards compatibility. See
         updated load_state_dict below. For an example, see VisualBERT model's
         code.
@@ -211,15 +212,16 @@ class BaseModel(nn.Module):
         return results
 
     @classmethod
-    def from_pretrained(cls, model_name, *args, **kwargs):
-        model_key = model_name.split(".")[0]
-        model_cls = registry.get_model_class(model_key)
-        assert (
-            model_cls == cls
-        ), f"Incorrect pretrained model key {model_name} for class {cls.__name__}"
-        output = load_pretrained_model(model_name, *args, **kwargs)
+    def from_pretrained(cls, model_name_or_path, *args, **kwargs):
+        if not PathManager.isfile(model_name_or_path):
+            model_key = model_name_or_path.split(".")[0]
+            model_cls = registry.get_model_class(model_key)
+            assert (
+                model_cls == cls
+            ), f"Incorrect pretrained model key {model_name_or_path} "
+            "for class {cls.__name__}"
+        output = load_pretrained_model(model_name_or_path, *args, **kwargs)
         config, checkpoint = output["config"], output["checkpoint"]
-
         # Some models need registry updates to be load pretrained model
         # If they have this method, call it so they can update accordingly
         if hasattr(cls, "update_registry_for_pretrained"):
