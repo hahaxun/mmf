@@ -9,9 +9,9 @@ import numpy as np
 import tests.test_utils as test_utils
 
 from multimodelity.models.mmbt import MMBT
-from mmf.models.mmbt import MMBT
-from mmf.utils.configuration import get_mmf_env, load_yaml
-from mmf.utils.file_io import PathManager
+from multimodelity.models.mmbt import MMBT
+from multimodelity.utils.configuration import get_multimodelity_env, load_yaml
+from multimodelity.utils.file_io import PathManager
 
 class TestModelInterfaces(unittest.TestCase):
     @test_utils.skip_if_no_network
@@ -48,7 +48,7 @@ class TestModelInterfaces(unittest.TestCase):
 
     def _create_checkpoint_file(self, path):
         home = str(Path.home())
-        data_dir = get_mmf_env(key="data_dir")
+        data_dir = get_multimodelity_env(key="data_dir")
         model_folder = os.path.join(
             home, data_dir, "models", "mmbt.hateful_memes.images"
         )

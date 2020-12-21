@@ -333,7 +333,7 @@ def check_header(url, from_google=False):
 def download_pretrained_model(model_name, *args, **kwargs):
     import omegaconf
     from omegaconf import OmegaConf
-    from multimodelity.utils.configuration import get_mmf_env, load_yaml
+    from multimodelity.utils.configuration import get_multimodelity_env, load_yaml
 
     model_zoo = load_yaml(get_multimodelity_env(key="model_zoo"))
     OmegaConf.set_struct(model_zoo, True)

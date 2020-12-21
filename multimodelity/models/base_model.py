@@ -61,7 +61,7 @@ logger = logging.getLogger(__name__)
 
 
 class BaseModel(nn.Module):
-    """For integration with MMF's trainer, datasets and other features,
+    """For integration with multimodelity's trainer, datasets and other features,
     models needs to inherit this class, call `super`, write a build function,
     write a forward function taking a ``SampleList`` as input and returning a
     dict as output and finally, register it using ``@registry.register_model``

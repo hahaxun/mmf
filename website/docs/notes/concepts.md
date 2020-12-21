@@ -81,7 +81,7 @@ from multimodelity.common.registry import registry
 
 ```
 
-Find more details about Registry class in its documentation [common/registry](https://mmf.sh/api/lib/common/registry.html).
+Find more details about Registry class in its documentation [common/registry](https://multimodelity.sh/api/lib/common/registry.html).
 
 ## Configuration
 
@@ -115,7 +115,7 @@ It is always helpful to verify your config overrides and final configuration val
 
 ## Processors
 
-The main aim of processors is to keep data processing pipelines as similar as possible for different datasets and allow code reusability. Processors take in a dict with keys corresponding to data they need and return back a dict with processed data. This helps keep processors independent of the rest of the logic by fixing the signatures they require. Processors are used in all of the datasets to hand off the data processing needs. Learn more about processors in the [documentation for processors](https://mmf.sh/api/lib/datasets/processors.html).
+The main aim of processors is to keep data processing pipelines as similar as possible for different datasets and allow code reusability. Processors take in a dict with keys corresponding to data they need and return back a dict with processed data. This helps keep processors independent of the rest of the logic by fixing the signatures they require. Processors are used in all of the datasets to hand off the data processing needs. Learn more about processors in the [documentation for processors](https://multimodelity.sh/api/lib/datasets/processors.html).
 
 ## Sample List
 
